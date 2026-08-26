@@ -151,6 +151,14 @@
   /* ---------- Mobile menu ---------- */
   const navToggle = document.getElementById("navToggle");
   const navLinks = document.getElementById("navLinks");
+
+  function closeMenu() {
+    navLinks.classList.remove("is-open");
+    navToggle.classList.remove("is-open");
+    navToggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+
   navToggle.addEventListener("click", function () {
     const open = navLinks.classList.toggle("is-open");
     navToggle.classList.toggle("is-open", open);
@@ -158,12 +166,18 @@
     document.body.style.overflow = open ? "hidden" : "";
   });
   navLinks.querySelectorAll("a").forEach(function (a) {
-    a.addEventListener("click", function () {
-      navLinks.classList.remove("is-open");
-      navToggle.classList.remove("is-open");
-      navToggle.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = "";
-    });
+    a.addEventListener("click", closeMenu);
+  });
+
+  /* Safety: auto-close the mobile menu when returning to desktop width
+     (otherwise body scroll stays locked) and on Escape */
+  const desktopMQ = window.matchMedia("(min-width: 769px)");
+  function onDesktop(e) { if (e.matches) closeMenu(); }
+  if (desktopMQ.addEventListener) desktopMQ.addEventListener("change", onDesktop);
+  else if (desktopMQ.addListener) desktopMQ.addListener(onDesktop);
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && navLinks.classList.contains("is-open")) closeMenu();
   });
 
   /* ---------- Active nav link ---------- */
@@ -275,6 +289,12 @@
   /* ---------- Footer year ---------- */
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* Keep an open FAQ answer fully visible when the viewport is resized */
+  window.addEventListener("resize", function () {
+    const openAnswer = document.querySelector(".faq-item.is-open .faq-a");
+    if (openAnswer) openAnswer.style.maxHeight = openAnswer.scrollHeight + "px";
+  });
 
   /* ---------- Initial render ---------- */
   renderProjects("all");
