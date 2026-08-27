@@ -1,5 +1,5 @@
 /* ============================================================
-   admin.css — Site Dashboard styles
+   admin.css - Site Dashboard styles
    ============================================================ */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -572,30 +572,49 @@ body {
   overflow: hidden;
 }
 
-/* ---- Logo Preview ---- */
-.logo-preview {
+/* ---- Social links preview (Site Info tab) ---- */
+.social-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 16px;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 80px;
 }
 
-.logo-preview img {
-  max-height: 64px;
-  max-width: 100%;
-  object-fit: contain;
+.social-preview .social-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: all var(--trans);
 }
 
-.logo-preview-text {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 0.02em;
+.social-preview .social-icon.is-dim {
+  opacity: 0.3;
+  filter: grayscale(1);
+}
+
+.social-preview .social-icon[data-social="facebook"]:not(.is-dim) {
+  color: #1877f2;
+  border-color: rgba(24, 119, 242, 0.5);
+}
+
+.social-preview .social-icon[data-social="whatsapp"]:not(.is-dim) {
+  color: #25d366;
+  border-color: rgba(37, 211, 102, 0.5);
+}
+
+.social-preview-note {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
 }
 
 /* ---- Upload area ---- */
@@ -686,7 +705,7 @@ body {
   flex-direction: column;
   gap: 12px;
   padding: 14px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--border);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.02);
 }
@@ -695,7 +714,7 @@ body {
   width: 100%;
   aspect-ratio: 1 / 1;
   max-height: 150px;
-  border: 1px dashed var(--line);
+  border: 1px dashed var(--border);
   border-radius: 10px;
   display: grid;
   place-items: center;
@@ -770,6 +789,7 @@ body {
 @media (max-width: 560px) {
   .dashboard.visible {
     flex-direction: column;
+  }
   .sidebar {
     width: 100%;
     height: auto;

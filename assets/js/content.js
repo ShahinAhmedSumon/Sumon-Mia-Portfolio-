@@ -61,32 +61,13 @@
       if (c.theme.bgColor) {
         document.documentElement.style.setProperty("--bg", c.theme.bgColor);
       }
-      if (c.theme.logoMark) {
-        var marks = document.querySelectorAll(".logo-mark");
-        marks.forEach(function (m) {
-          var dot = m.querySelector(".logo-dot");
-          var dotHtml = dot ? dot.outerHTML : "";
-          m.textContent = c.theme.logoMark;
-          if (dotHtml) m.insertAdjacentHTML("beforeend", dotHtml);
-        });
-      }
-      if (c.theme.logoText) {
-        var texts = document.querySelectorAll(".logo-text");
-        texts.forEach(function (t) {
-          t.innerHTML = c.theme.logoText.replace(" ", "&nbsp;");
-        });
-      }
-      /* Logo image - replaces the text logo mark when set */
+      /* Logo image - overrides the default picture logo (navbar + footer) when set */
       if (c.theme.logoImage) {
-        var markEl = document.querySelector(".logo .logo-mark");
-        if (markEl) {
-          var logoImg = document.createElement("img");
-          logoImg.src = c.theme.logoImage;
-          logoImg.alt = (c.theme.logoText || "Logo");
-          logoImg.className = "logo-img";
-          markEl.innerHTML = "";
-          markEl.appendChild(logoImg);
-        }
+        var logos = document.querySelectorAll(".logo .logo-img");
+        logos.forEach(function (img) {
+          img.src = c.theme.logoImage;
+          img.alt = "Ahmed Sumon";
+        });
       }
       /* Favicon - swaps the browser-tab icon when set */
       if (c.theme.faviconImage) {
@@ -113,6 +94,29 @@
       }
     }
 
+    /* ---- Social links (footer + mobile menu) ---- */
+    (function () {
+      var social = c.social || {};
+      var rows = [document.querySelector(".footer-social"), document.querySelector(".nav-social")];
+      var fbHref = socialUrl(social.facebook, false);
+      var waHref = socialUrl(social.whatsapp, true);
+      rows.forEach(function (row) {
+        if (!row) return;
+        var fbIcon = row.querySelector('.social-icon[data-social="facebook"]');
+        var waIcon = row.querySelector('.social-icon[data-social="whatsapp"]');
+        if (fbIcon) {
+          if (fbHref) { fbIcon.href = fbHref; fbIcon.style.display = ""; }
+          else fbIcon.style.display = "none";
+        }
+        if (waIcon) {
+          if (waHref) { waIcon.href = waHref; waIcon.style.display = ""; }
+          else waIcon.style.display = "none";
+        }
+        /* Hide the whole row when neither link is set */
+        row.style.display = (fbHref || waHref) ? "" : "none";
+      });
+    })();
+
     /* Dispatch event so main.js can use updated content */
     document.dispatchEvent(new CustomEvent("contentLoaded", { detail: c }));
   }
@@ -121,6 +125,21 @@
     if (!value) return;
     var el = document.querySelector(selector);
     if (el) el.textContent = value;
+  }
+
+  /* Normalise a stored social value into a usable href.
+     whatsapp=true turns a raw number (01867-473337 / 8801867473337)
+     into a wa.me link; full URLs pass through untouched. */
+  function socialUrl(value, whatsapp) {
+    if (value === undefined || value === null) return "";
+    var v = String(value).trim();
+    if (!v) return "";
+    if (/^https?:\/\//i.test(v)) return v;
+    if (whatsapp) {
+      var digits = v.replace(/\D/g, "");
+      return digits ? "https://wa.me/" + digits : "";
+    }
+    return "https://" + v;
   }
 
   /* Fetch content.json */

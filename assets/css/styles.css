@@ -1,5 +1,5 @@
 /* ============================================================
-   Ahmed Sumon — Portfolio
+   Ahmed Sumon - Portfolio
    Premium dark theme · Sora / Inter / JetBrains Mono
    ============================================================ */
 
@@ -139,16 +139,7 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
   display: flex; align-items: center; justify-content: space-between; gap: 20px;
 }
 .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-head); font-weight: 700; font-size: 18px; }
-.logo-mark {
-  width: 40px; height: 40px; border-radius: 11px;
-  background: var(--grad); color: #0a0c16;
-  display: grid; place-items: center; font-size: 19px; font-weight: 800;
-  box-shadow: 0 6px 20px rgba(124, 140, 255, 0.3);
-}
-.logo-dot { color: #0a0c16; }
-.logo-text { letter-spacing: -0.02em; }
-/* Logo image uploaded via dashboard (only rendered when theme.logoImage is set) */
-.logo-mark .logo-img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; display: block; }
+.logo-img { height: 40px; width: auto; border-radius: 10px; display: block; }
 
 .nav-links { display: flex; align-items: center; gap: 28px; }
 .nav-link {
@@ -467,19 +458,75 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
 .why-item h3 { font-family: var(--font-head); font-size: 19px; font-weight: 700; margin-bottom: 12px; }
 .why-item p { color: var(--muted); font-size: 15px; }
 
-/* ---------- Process ---------- */
-.process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; }
-.step {
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 32px; position: relative;
+/* ---------- Process (build log) ---------- */
+.buildlog { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 64px; align-items: start; }
+.buildlog-intro { position: sticky; top: calc(var(--nav-h) + 40px); }
+.buildlog-lead { margin-top: 20px; color: var(--muted); font-size: 17px; max-width: 460px; }
+.buildlog-facts {
+  list-style: none; margin-top: 28px;
+  display: flex; flex-direction: column; gap: 13px;
+  font-family: var(--font-mono); font-size: 14.5px; color: var(--text);
 }
-.step-num {
-  font-family: var(--font-head); font-weight: 800; font-size: 44px; line-height: 1;
-  background: var(--grad); -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent; display: block; margin-bottom: 18px;
+.buildlog-facts li { display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+.buildlog-facts li::before { content: "✓"; color: #3ddc84; font-weight: 700; flex-shrink: 0; }
+
+.buildlog-terminal {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
 }
-.step h3 { font-family: var(--font-head); font-size: 19px; font-weight: 700; margin-bottom: 10px; }
-.step p { color: var(--muted); font-size: 14.5px; }
+.buildlog-head {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding: 13px 16px; border-bottom: 1px solid var(--line); background: var(--bg-soft);
+}
+.buildlog-path { margin-left: 6px; font-family: var(--font-mono); font-size: 12.5px; color: var(--muted-2); }
+.buildlog-badge {
+  margin-left: auto; display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 11.5px; color: #3ddc84;
+  border: 1px solid rgba(61, 220, 132, 0.35); background: rgba(61, 220, 132, 0.08);
+  padding: 4px 10px; border-radius: 999px; white-space: nowrap;
+}
+
+.buildlog-body { padding: 26px 28px 22px; }
+.buildlog-entry { display: grid; grid-template-columns: 16px 1fr; gap: 18px; }
+.buildlog-content { padding-bottom: 26px; }
+.buildlog-entry.is-last .buildlog-content { padding-bottom: 20px; }
+.buildlog-rail { position: relative; display: flex; justify-content: center; }
+.buildlog-rail::after {
+  content: ""; position: absolute; left: 50%; top: 17px; bottom: 0; width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, var(--accent), var(--accent-2) 55%, rgba(79, 216, 255, 0.25));
+  box-shadow: 0 0 12px rgba(124, 140, 255, 0.55);
+}
+.buildlog-entry.is-last .buildlog-rail::after { display: none; }
+.buildlog-node {
+  position: relative; z-index: 1; flex-shrink: 0;
+  width: 13px; height: 13px; margin-top: 4px; border-radius: 50%;
+  background: var(--surface); border: 2px solid var(--accent);
+  box-shadow: 0 0 0 4px rgba(124, 140, 255, 0.14), 0 0 14px rgba(124, 140, 255, 0.65);
+}
+.buildlog-entry.is-last .buildlog-node {
+  border-color: #3ddc84;
+  box-shadow: 0 0 0 4px rgba(61, 220, 132, 0.14), 0 0 14px rgba(61, 220, 132, 0.65);
+}
+.buildlog-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 7px; }
+.buildlog-hash { font-family: var(--font-mono); font-size: 12.5px; color: var(--accent-2); }
+.buildlog-branch {
+  font-family: var(--font-mono); font-size: 11px; color: var(--muted-2);
+  border: 1px solid var(--line-strong); border-radius: 999px; padding: 2px 9px;
+}
+.buildlog-branch.release { color: #3ddc84; border-color: rgba(61, 220, 132, 0.4); }
+.buildlog-day { margin-left: auto; font-family: var(--font-mono); font-size: 12px; color: var(--muted-2); }
+.buildlog-title { font-family: var(--font-head); font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+.buildlog-desc { color: var(--muted); font-size: 14.5px; margin-top: 6px; }
+.buildlog-deliver { margin-top: 10px; font-family: var(--font-mono); font-size: 13px; color: #a5e68c; }
+.buildlog-passed {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-mono); font-size: 13.5px; color: #3ddc84;
+  border: 1px solid rgba(61, 220, 132, 0.3); background: rgba(61, 220, 132, 0.07);
+  border-radius: 10px; padding: 12px 16px;
+}
+.buildlog-passed .typing-caret { background: #3ddc84; }
 
 /* ---------- CTA band ---------- */
 .cta-band {
@@ -562,6 +609,24 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
 .footer-links { display: flex; gap: 26px; }
 .footer-links a { color: var(--muted); font-size: 14.5px; transition: color 0.25s; }
 .footer-links a:hover { color: var(--accent-2); }
+
+/* ---------- Social icons (footer + mobile menu) ---------- */
+.footer-social { display: flex; gap: 12px; }
+.nav-social { display: none; }
+.social-icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid var(--line-strong); background: rgba(255, 255, 255, 0.02);
+  color: var(--muted); display: grid; place-items: center;
+  transition: transform 0.3s var(--ease), color 0.3s, border-color 0.3s, background 0.3s;
+}
+.social-icon:hover { transform: translateY(-3px); }
+.social-icon[data-social="facebook"]:hover {
+  color: #1877f2; border-color: #1877f2; background: rgba(24, 119, 242, 0.1);
+}
+.social-icon[data-social="whatsapp"]:hover {
+  color: #25d366; border-color: #25d366; background: rgba(37, 211, 102, 0.1);
+}
+
 .footer-email { color: var(--accent-2); font-family: var(--font-mono); font-size: 14px; }
 .footer-copy { color: var(--muted-2); font-size: 13.5px; margin-top: 8px; }
 
@@ -590,7 +655,8 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
   .skills-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .work-grid { grid-template-columns: repeat(2, 1fr); }
   .why-grid { grid-template-columns: repeat(2, 1fr); }
-  .process-steps { grid-template-columns: repeat(2, 1fr); }
+  .buildlog { grid-template-columns: 1fr; gap: 44px; }
+  .buildlog-intro { position: static; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .faq-wrap { grid-template-columns: 1fr; gap: 40px; }
   .section { padding: 92px 0; }
@@ -615,6 +681,10 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
   .nav-links.is-open { transform: translateX(0); }
   .nav-links .nav-link { font-size: 19px; padding: 10px 0; width: 100%; }
   .nav-links .nav-cta { margin: 14px 0 0; width: 100%; justify-content: center; }
+  .nav-links .nav-social {
+    display: flex; gap: 12px; width: 100%;
+    margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line);
+  }
   .nav-toggle { display: flex; z-index: 1100; padding: 10px; }
   .nav-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-toggle.is-open span:nth-child(2) { opacity: 0; }
@@ -640,8 +710,10 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
   .services-grid, .why-grid, .work-grid, .skills-grid { grid-template-columns: 1fr; gap: 18px; }
   .service-card { padding: 26px 22px; }
   .why-item { padding: 26px 22px; }
-  .process-steps { grid-template-columns: 1fr; gap: 18px; }
-  .step { padding: 26px 22px; }
+  .buildlog { gap: 34px; }
+  .buildlog-lead { font-size: 16px; }
+  .buildlog-body { padding: 20px 18px 18px; }
+  .buildlog-entry { gap: 12px; }
   .work-card { padding: 22px 20px; min-height: 0; }
   .work-card.featured { grid-column: span 1; }
   .work-name { font-size: 19px; }
@@ -708,7 +780,16 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
   .service-card { padding: 24px 18px; }
   .service-card p { font-size: 15px; }
   .why-item { padding: 24px 18px; }
-  .step { padding: 24px 18px; }
+  .buildlog-head { padding: 11px 12px; gap: 6px; }
+  .buildlog-path { font-size: 11px; margin-left: 2px; }
+  .buildlog-badge { font-size: 10.5px; padding: 3px 9px; }
+  .buildlog-body { padding: 18px 14px 16px; }
+  .buildlog-entry { gap: 10px; }
+  .buildlog-content { padding-bottom: 20px; }
+  .buildlog-title { font-size: 16.5px; }
+  .buildlog-desc { font-size: 14px; }
+  .buildlog-deliver { font-size: 12.5px; }
+  .buildlog-passed { font-size: 12.5px; padding: 10px 13px; }
   .work-card { padding: 20px 18px; }
   .work-name { font-size: 18px; }
   .work-desc { font-size: 14px; }
