@@ -1,0 +1,140 @@
+{
+  "meta": {
+    "title": "Ahmed Sumon — Web Developer · WordPress, Shopify & SEO Specialist",
+    "description": "Ahmed Sumon is a web developer with 3+ years of industry experience building WordPress, Shopify and custom websites — including eCommerce, SEO and performance optimisation — for international clients across many industries.",
+    "author": "Ahmed Sumon"
+  },
+  "hero": {
+    "available": "Available for new projects",
+    "headline1": "I build websites that",
+    "headline2": "grow businesses.",
+    "typingRoles": ["Web Developer", "WordPress Specialist", "Shopify Developer", "SEO Specialist"],
+    "intro": "Hi, I'm <strong>Ahmed Sumon</strong> — a web developer with 3+ years of industry experience building <strong>WordPress</strong>, <strong>Shopify</strong> and <strong>custom</strong> websites for international clients. From design and development to eCommerce, SEO and performance, I deliver complete digital solutions.",
+    "cta1": "See My Work",
+    "cta2": "Let's Talk"
+  },
+  "about": {
+    "tagline": "About Me",
+    "headline": "Passionate developer. Reliable partner.",
+    "bio1": "I'm Ahmed Sumon, a web developer and digital specialist based in Bangladesh, working with clients worldwide. I bring together design thinking, solid code and growth-focused strategy to build websites that don't just look good — they perform.",
+    "bio2": "Over 3+ years I've built 21+ websites across e-commerce, SaaS, services and creative industries — each one crafted to meet real business goals, on time and on budget.",
+    "stats": {
+      "yearsExp": 3,
+      "projects": 21,
+      "clients": 18,
+      "satisfaction": 100
+    },
+    "statsLabels": {
+      "yearsExp": "Years Experience",
+      "projects": "Projects Delivered",
+      "clients": "Happy Clients",
+      "satisfaction": "% Satisfaction"
+    },
+    "location": "Bangladesh",
+    "availability": "Open to remote work worldwide",
+    "email": "ahmedsumonshahin645@gmail.com"
+  },
+  "services": [
+    {
+      "icon": "wordpress",
+      "title": "WordPress Development",
+      "desc": "Custom themes, Elementor builds, WooCommerce stores and plugin integration — fast, secure and SEO-ready WordPress websites built to scale.",
+      "features": ["Custom theme & Elementor builds", "WooCommerce & plugin integration", "Performance & security hardening", "Ongoing maintenance"]
+    },
+    {
+      "icon": "shopify",
+      "title": "Shopify & eCommerce",
+      "desc": "Shopify store setup, theme customisation, app integration and conversion-focused design — everything you need to sell online effectively.",
+      "features": ["Shopify store setup & migration", "Theme customisation & design", "App & payment integration", "Conversion-rate optimisation"]
+    },
+    {
+      "icon": "custom",
+      "title": "Custom Web Development",
+      "desc": "Hand-coded HTML, CSS and JavaScript websites and landing pages — no bloat, maximum speed, pixel-perfect on all devices.",
+      "features": ["Pixel-perfect responsive builds", "Vanilla JS interactions", "Blazing-fast load times", "Clean, maintainable code"]
+    },
+    {
+      "icon": "seo",
+      "title": "SEO & Performance",
+      "desc": "Technical SEO audits, on-page optimisation and Core Web Vitals improvements to help your site rank higher and load faster.",
+      "features": ["Technical SEO audit & fixes", "On-page optimisation", "Core Web Vitals / PageSpeed", "Schema markup & structured data"]
+    }
+  ],
+  "skills": {
+    "development": [
+      { "name": "HTML / CSS", "pct": 96 },
+      { "name": "JavaScript (ES6+)", "pct": 88 },
+      { "name": "PHP", "pct": 78 },
+      { "name": "Responsive Design", "pct": 95 }
+    ],
+    "cms": [
+      { "name": "WordPress / Elementor", "pct": 95 },
+      { "name": "WooCommerce", "pct": 88 },
+      { "name": "Shopify / Liquid", "pct": 82 },
+      { "name": "Custom CMS", "pct": 75 }
+    ],
+    "growth": [
+      { "name": "Technical SEO", "pct": 85 },
+      { "name": "Google Analytics / GSC", "pct": 80 },
+      { "name": "PageSpeed / CWV", "pct": 87 },
+      { "name": "Conversion Optimisation", "pct": 78 }
+    ]
+  },
+  "projects": [
+    { "name": "Serve Flow Automation", "domain": "serveflowautomation.com", "url": "https://serveflowautomation.com/", "cat": "business", "featured": true, "desc": "Business and automation services website built for a professional service provider." },
+    { "name": "Quality Core Fence", "domain": "qualitycorefence.com", "url": "https://qualitycorefence.com/", "cat": "services", "featured": true, "desc": "Company website for a fencing and outdoor services business." },
+    { "name": "Fan District", "domain": "fandistrict.dk", "url": "https://fandistrict.dk/da/", "cat": "ecommerce", "featured": false, "desc": "eCommerce store built around a fan community and merchandise." },
+    { "name": "Casa Neat Cleaners", "domain": "casaneatcleaners.com", "url": "https://casaneatcleaners.com/", "cat": "services", "featured": false, "desc": "Professional cleaning services website with a clean, trustworthy feel." },
+    { "name": "Cityscape Design LLC", "domain": "cityescapedesignllc.com", "url": "https://cityescapedesignllc.com/", "cat": "creative", "featured": false, "desc": "Design studio portfolio and services website." },
+    { "name": "Blue Ocean LLC", "domain": "blueoceanllc.com", "url": "https://blueoceanllc.com/", "cat": "business", "featured": false, "desc": "Corporate business website for an established company." },
+    { "name": "Katie Hawkins Artist", "domain": "katiehawkinsartist.co.uk", "url": "https://katiehawkinsartist.co.uk/", "cat": "creative", "featured": false, "desc": "Artist portfolio website showcasing work in a clean gallery layout." },
+    { "name": "Ascendia Academy", "domain": "ascendiaacademy.co.uk", "url": "https://ascendiaacademy.co.uk/", "cat": "education", "featured": false, "desc": "Education and academy website built to present courses and programmes." },
+    { "name": "Vey Lab", "domain": "vey-lab.com", "url": "https://vey-lab.com/", "cat": "niche", "featured": false, "desc": "Specialized lab and supplement website with a scientific feel." },
+    { "name": "MG Groep", "domain": "mggroep.org", "url": "https://www.mggroep.org/", "cat": "corporate", "featured": false, "desc": "Corporate group website for a multi-brand organisation." },
+    { "name": "Revive Compounds", "domain": "revivecompounds.com", "url": "https://revivecompounds.com/", "cat": "niche", "featured": true, "desc": "Supplement and compounds eCommerce website with a premium finish." },
+    { "name": "David Miller Art", "domain": "davidmiller.art", "url": "https://davidmiller.art/", "cat": "creative", "featured": false, "desc": "Artist portfolio website presenting a body of creative work." },
+    { "name": "Access Proof", "domain": "accessproof.nl", "url": "https://www.accessproof.nl/", "cat": "services", "featured": false, "desc": "Specialized service provider website with clear messaging." },
+    { "name": "Johanna K", "domain": "johanna-k.com", "url": "https://johanna-k.com/", "cat": "creative", "featured": false, "desc": "Personal and creative portfolio website." },
+    { "name": "Med Growth Media", "domain": "medgrowthmedia.com", "url": "https://medgrowthmedia.com/", "cat": "niche", "featured": false, "desc": "Healthcare marketing and media website." },
+    { "name": "Caprium", "domain": "caprium.de", "url": "https://caprium.de/", "cat": "corporate", "featured": false, "desc": "Corporate website with a modern, business-focused design." },
+    { "name": "Vibrant Accountants", "domain": "vibrantaccountants.com", "url": "https://vibrantaccountants.com/", "cat": "services", "featured": false, "desc": "Accounting and professional services website." },
+    { "name": "Golden Age Serenity", "domain": "goldenageserenity.com", "url": "https://goldenageserenity.com/", "cat": "niche", "featured": false, "desc": "Senior care and healthcare services website." },
+    { "name": "Haydar", "domain": "haydar.ch", "url": "https://haydar.ch/", "cat": "creative", "featured": false, "desc": "Personal brand and portfolio website." },
+    { "name": "Hanna Berger", "domain": "hannaberger.com", "url": "https://hannaberger.com/", "cat": "creative", "featured": false, "desc": "Personal and creative portfolio website." },
+    { "name": "Wereld van Tuut", "domain": "wereldvantuut.nl", "url": "https://wereldvantuut.nl/", "cat": "creative", "featured": false, "desc": "Creative website for a Dutch brand and community." }
+  ],
+  "faq": [
+    {
+      "q": "What types of websites do you build?",
+      "a": "I build a wide range — from simple landing pages to complex eCommerce stores. My main focus is WordPress (including Elementor and WooCommerce), Shopify, and custom HTML/CSS/JS sites. I've worked with clients in services, retail, education, healthcare, creative industries and more."
+    },
+    {
+      "q": "How long does a typical project take?",
+      "a": "A simple landing page or small business website typically takes 1–2 weeks. A full WordPress or Shopify build with custom design usually takes 2–4 weeks. Larger or more complex projects may take longer — I'll give you a realistic timeline upfront during our initial discussion."
+    },
+    {
+      "q": "Do you offer ongoing support after launch?",
+      "a": "Yes. I offer post-launch support and maintenance for all projects. This can include content updates, security patches, performance monitoring, plugin updates and small feature additions. We can set up a retainer or handle things on a per-request basis, whichever works best for you."
+    },
+    {
+      "q": "How do we communicate during the project?",
+      "a": "Primarily via email. I'm responsive and typically reply within a few hours during working hours. For larger projects I use a shared Google Doc or Notion board to track progress, feedback and tasks. I provide regular updates so you always know where things stand."
+    },
+    {
+      "q": "What information do you need to get started?",
+      "a": "A brief overview of your business, your goals for the website, any examples of sites you like, your target audience and your rough timeline. If you have existing branding (logo, colours, fonts) that's helpful too — but not required. We can figure out the details together."
+    }
+  ],
+  "contact": {
+    "email": "ahmedsumonshahin645@gmail.com",
+    "location": "Working with clients worldwide (remote)",
+    "responseTime": "Usually within 24 hours",
+    "availability": "Currently available for new projects"
+  },
+  "theme": {
+    "accentColor": "#7c8cff",
+    "bgColor": "#080a12",
+    "logoText": "Ahmed Sumon",
+    "logoMark": "A"
+  }
+}

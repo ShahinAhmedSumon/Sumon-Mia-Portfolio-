@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Site Dashboard — Ahmed Sumon Portfolio</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23080a12'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='24' font-weight='700' fill='%237c8cff' text-anchor='middle'%3E⚙%3C/text%3E%3C/svg%3E" />
+
+  <link rel="stylesheet" href="assets/css/admin.css" />
+</head>
+
+<body>
+
+<!-- ================================================================
+     LOGIN SCREEN
+================================================================ -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">
+      <span>A<span class="dot">.</span></span>
+      <span>Site Dashboard</span>
+    </div>
+    <p class="login-subtitle">Ahmed Sumon Portfolio — Admin Panel</p>
+
+    <label class="login-label" for="tokenInput">GitHub Personal Access Token</label>
+    <input
+      class="login-input"
+      id="tokenInput"
+      type="password"
+      placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
+      autocomplete="current-password"
+      spellcheck="false"
+    />
+    <p class="login-hint">
+      Needs <strong>repo</strong> scope.
+      <a href="https://github.com/settings/tokens/new?scopes=repo&description=Portfolio+Dashboard" target="_blank" rel="noopener">Generate one →</a>
+    </p>
+
+    <button class="btn-login" id="loginBtn">Sign In →</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     DASHBOARD
+================================================================ -->
+<div class="dashboard" id="dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span>A<span style="color:var(--accent2)">.</span></span>
+      <span>Dashboard</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item" data-tab="overview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Overview
+      </button>
+      <button class="nav-item" data-tab="hero">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Hero
+      </button>
+      <button class="nav-item" data-tab="about">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        About
+      </button>
+      <button class="nav-item" data-tab="projects">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        Projects
+      </button>
+      <button class="nav-item" data-tab="faq">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg>
+        FAQ
+      </button>
+      <button class="nav-item" data-tab="contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        Contact
+      </button>
+      <button class="nav-item" data-tab="theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        Theme
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="logout-btn" id="logoutBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sign Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main-content">
+
+    <!-- ==== OVERVIEW ==== -->
+    <section class="tab-section" data-tab="overview">
+      <div class="page-header">
+        <h1 class="page-title">Overview</h1>
+        <p class="page-desc">Summary of your portfolio content.</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="ovProjects">—</div>
+          <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="ovFeatured">—</div>
+          <div class="stat-label">Featured</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="ovFaqs">—</div>
+          <div class="stat-label">FAQ Items</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="ovTheme" style="font-size:18px">—</div>
+          <div class="stat-label">Accent Colour</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          How this dashboard works
+        </div>
+        <p style="color:var(--muted);font-size:14px;line-height:1.8;">
+          Edit any section using the navigation on the left, then click <strong style="color:var(--text)">Save Changes</strong> at the bottom.
+          The dashboard commits <code style="color:var(--accent);font-family:monospace">content.json</code> directly to GitHub via the API — GitHub Pages automatically rebuilds your site within a minute or two.
+          <br><br>
+          <strong style="color:var(--text)">Tip:</strong> Your GitHub Personal Access Token is stored only in this browser tab's session memory and is never sent anywhere except GitHub's own API.
+        </p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          Quick links
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a href="https://shahinahmedsumon.github.io/Sumon-Mia-Portfolio-/" target="_blank" rel="noopener" style="color:var(--accent);font-size:14px;text-decoration:none;">🌐 Live site →</a>
+          <a href="https://shahinahmedsumon.github.io/Sumon-Mia-Portfolio-/content.json" target="_blank" rel="noopener" style="color:var(--accent);font-size:14px;text-decoration:none;">📄 content.json →</a>
+          <a href="https://github.com/ShahinAhmedSumon/Sumon-Mia-Portfolio-/actions" target="_blank" rel="noopener" style="color:var(--accent);font-size:14px;text-decoration:none;">⚙ GitHub Actions →</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==== HERO ==== -->
+    <section class="tab-section" data-tab="hero">
+      <div class="page-header">
+        <h1 class="page-title">Hero Section</h1>
+        <p class="page-desc">The top "above the fold" content of your homepage.</p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          Hero text
+        </div>
+
+        <div class="field">
+          <label>Availability badge</label>
+          <input type="text" id="heroAvailable" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Headline line 1</label>
+            <input type="text" id="heroHeadline1" />
+          </div>
+          <div class="field">
+            <label>Headline line 2 (gradient)</label>
+            <input type="text" id="heroHeadline2" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Intro paragraph (HTML allowed)</label>
+          <textarea id="heroIntro" rows="4"></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>CTA button 1</label>
+            <input type="text" id="heroCta1" />
+          </div>
+          <div class="field">
+            <label>CTA button 2</label>
+            <input type="text" id="heroCta2" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Typing roles (one per line)</label>
+          <textarea id="heroRoles" rows="5" style="font-family:monospace"></textarea>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==== ABOUT ==== -->
+    <section class="tab-section" data-tab="about">
+      <div class="page-header">
+        <h1 class="page-title">About Section</h1>
+        <p class="page-desc">Your bio and stats.</p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          Bio
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Section tagline</label>
+            <input type="text" id="aboutTagline" />
+          </div>
+          <div class="field">
+            <label>Section headline</label>
+            <input type="text" id="aboutHeadline" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Bio paragraph 1</label>
+          <textarea id="aboutBio1" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label>Bio paragraph 2</label>
+          <textarea id="aboutBio2" rows="3"></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Location</label>
+            <input type="text" id="aboutLocation" />
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" id="aboutEmail" />
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+          Stats counters
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Years experience</label>
+            <input type="text" id="statYears" />
+          </div>
+          <div class="field">
+            <label>Projects delivered</label>
+            <input type="text" id="statProjects" />
+          </div>
+          <div class="field">
+            <label>Happy clients</label>
+            <input type="text" id="statClients" />
+          </div>
+          <div class="field">
+            <label>% Satisfaction</label>
+            <input type="text" id="statSat" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==== PROJECTS ==== -->
+    <section class="tab-section" data-tab="projects">
+      <div class="page-header">
+        <h1 class="page-title">Projects</h1>
+        <p class="page-desc">Add, edit or remove portfolio projects. Click a project to edit it.</p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title" style="justify-content:space-between;">
+          <span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+            All projects
+          </span>
+          <button class="btn-icon" id="addProjectBtn" style="border-color:var(--accent);color:var(--accent);">+ Add Project</button>
+        </div>
+        <div class="project-list" id="projectList"></div>
+      </div>
+    </section>
+
+
+    <!-- ==== FAQ ==== -->
+    <section class="tab-section" data-tab="faq">
+      <div class="page-header">
+        <h1 class="page-title">FAQ</h1>
+        <p class="page-desc">Frequently asked questions shown on your site.</p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title" style="justify-content:space-between;">
+          <span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg>
+            FAQ items
+          </span>
+          <button class="btn-icon" id="addFaqBtn" style="border-color:var(--accent);color:var(--accent);">+ Add FAQ</button>
+        </div>
+        <div class="faq-list" id="faqList"></div>
+      </div>
+    </section>
+
+
+    <!-- ==== CONTACT ==== -->
+    <section class="tab-section" data-tab="contact">
+      <div class="page-header">
+        <h1 class="page-title">Contact Info</h1>
+        <p class="page-desc">Contact details shown in the contact section.</p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          Contact details
+        </div>
+        <div class="field">
+          <label>Email address</label>
+          <input type="email" id="contactEmail" />
+        </div>
+        <div class="field">
+          <label>Location text</label>
+          <input type="text" id="contactLocation" />
+        </div>
+        <div class="field">
+          <label>Response time text</label>
+          <input type="text" id="contactResponse" />
+        </div>
+        <div class="field">
+          <label>Availability note</label>
+          <input type="text" id="contactAvail" />
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==== THEME ==== -->
+    <section class="tab-section" data-tab="theme">
+      <div class="page-header">
+        <h1 class="page-title">Theme &amp; Logo</h1>
+        <p class="page-desc">Customise colours and branding.</p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          Colours
+        </div>
+
+        <div class="theme-preview" id="themePreview">A. Ahmed Sumon</div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Accent colour</label>
+            <input type="color" id="themeAccent" value="#7c8cff" />
+          </div>
+          <div class="field">
+            <label>Background colour</label>
+            <input type="color" id="themeBg" value="#080a12" />
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+          Logo text
+        </div>
+        <div class="logo-preview" id="logoPreview">
+          <span class="logo-preview-text">A. Ahmed Sumon</span>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Logo mark character</label>
+            <input type="text" id="themeLogoMark" maxlength="4" />
+          </div>
+          <div class="field">
+            <label>Logo text</label>
+            <input type="text" id="themeLogoText" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- /main-content -->
+
+</div><!-- /dashboard -->
+
+
+<!-- ================================================================
+     SAVE BAR
+================================================================ -->
+<div class="save-bar" id="saveBar">
+  <div class="save-status" id="saveStatus">
+    <span class="dot-status"></span>
+    <span id="saveStatusText">Ready</span>
+  </div>
+  <button class="btn-save" id="saveBtn">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+    Save Changes
+  </button>
+</div>
+
+
+<!-- ================================================================
+     PROJECT MODAL
+================================================================ -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal">
+    <h2 class="modal-title" id="projectModalTitle">Edit Project</h2>
+
+    <div class="field">
+      <label>Project name</label>
+      <input type="text" id="pName" placeholder="Serve Flow Automation" />
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Domain</label>
+        <input type="text" id="pDomain" placeholder="example.com" />
+      </div>
+      <div class="field">
+        <label>URL</label>
+        <input type="url" id="pUrl" placeholder="https://example.com/" />
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Category</label>
+        <select id="pCat">
+          <option value="business">Business</option>
+          <option value="ecommerce">eCommerce</option>
+          <option value="services">Services</option>
+          <option value="corporate">Corporate</option>
+          <option value="creative">Creative</option>
+          <option value="education">Education</option>
+          <option value="niche">Specialized</option>
+        </select>
+      </div>
+      <div class="field" style="display:flex;align-items:flex-end;gap:8px;padding-bottom:2px;">
+        <label style="margin-bottom:0;display:flex;align-items:center;gap:8px;cursor:pointer;">
+          <input type="checkbox" id="pFeatured" style="width:auto;" />
+          Featured project
+        </label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Description</label>
+      <textarea id="pDesc" rows="3" placeholder="Short description shown on the card…"></textarea>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-danger" id="projectModalDelete" style="display:none;margin-right:auto;">Delete</button>
+      <button class="btn-secondary" id="projectModalCancel">Cancel</button>
+      <button class="btn-primary" id="projectModalSave">Save Project</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     FAQ MODAL
+================================================================ -->
+<div class="modal-overlay" id="faqModal">
+  <div class="modal">
+    <h2 class="modal-title" id="faqModalTitle">Edit FAQ</h2>
+
+    <div class="field">
+      <label>Question</label>
+      <input type="text" id="faqQ" placeholder="What types of websites do you build?" />
+    </div>
+    <div class="field">
+      <label>Answer</label>
+      <textarea id="faqA" rows="5" placeholder="Your answer here…"></textarea>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-danger" id="faqModalDelete" style="display:none;margin-right:auto;">Delete</button>
+      <button class="btn-secondary" id="faqModalCancel">Cancel</button>
+      <button class="btn-primary" id="faqModalSave">Save FAQ</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     TOAST CONTAINER
+================================================================ -->
+<div class="toast-container" id="toastContainer"></div>
+
+
+<script src="assets/js/admin.js"></script>
+</body>
+</html>
