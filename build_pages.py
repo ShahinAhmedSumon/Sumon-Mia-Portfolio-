@@ -452,7 +452,7 @@ story_body = """
                 "My dad was an audiophile and constantly had music playing to test his components — mostly symphonic. Just by living in that house I received a great musical education, plus the normal father/son arguments about my practice habits.") + """
         """ + tl("1984", "Greenfield Competition",
                 "My greatest accomplishment in my youth: at twelve, I won the Philadelphia Orchestra's Student Competition (now the Albert M. Greenfield Competition). The prize was a solo with the Orchestra — the following year I played the first movement of Mozart's Fourth Concerto at the Academy of Music.",
-                "solo-stage.jpg", "Soloist on the Academy of Music stage") + """
+                "young-richard.jpg", "Soloist on the Academy of Music stage") + """
         """ + tl("1986", "Norman Carol",
                 "In high school I took lessons with the Orchestra's retired Concertmaster, played chamber ensembles and Philadelphia Youth Orchestra, and studied piano — while still not considering myself dedicated or passionate about practising.") + """
         """ + tl("1988", "Not music school",
@@ -681,102 +681,34 @@ page("performances.html", "Performances — Philadelphia Orchestra member since 
 
 # ============================================================ CASE STUDIES
 def case(n, name, role, headline, quote, paras, tags, img=None):
-    media = ""
     if img:
-        media = '<figure class="ph ph--s" data-reveal="scale" style="aspect-ratio:16/10"><img src="assets/img/%s" alt="%s" width="900" height="560"></figure>' % (img, name)
+        media = ('<figure class="ph ph--s" data-reveal="scale" style="aspect-ratio:16/10">'
+                 '<img src="assets/img/%s" alt="%s" width="900" height="560">'
+                 '<figcaption class="cap"><b>%s</b><span>Case study %02d</span></figcaption></figure>') % (img, name, name, n)
     else:
-        media = '<div class="ph ph--s" data-reveal="scale" style="aspect-ratio:16/10;display:grid;place-items:center;background:var(--sand)"><span class="sig" style="font-size:4.4rem;color:var(--amber)">' + name[0] + '</span></div>'
+        media = ('<div class="ph ph--s" data-reveal="scale" style="aspect-ratio:16/10;display:grid;place-items:center;'
+                 'background:linear-gradient(160deg,#E8DCC8,#DFD0B7)"><span class="sig" style="font-size:4.4rem;color:var(--amber)">'
+                 + name[0] + '</span></div>')
     ps = "".join("<p>%s</p>" % p for p in paras)
+    pills = "".join('<span class="pill">%s</span>' % t for t in tags)
     return """
 <article class="g-split" style="align-items:start;padding-block:clamp(2rem,4.5vw,4rem);border-top:1px solid var(--rule)">
   <div class="stack">
-    <p class="label"><i class="dash"></i>Case study %02d</p>
+    <p class="label"><i class="dash"></i>Case study %02d — %s</p>
     <h3 class="d-3">%s</h3>
-    <p class="small" style="letter-spacing:.14em;text-transform:uppercase;font-size:.7rem">%s</p>
+    <div class="quote">
+      <p class="display" style="font-size:1.15rem;line-height:1.34;font-weight:500;letter-spacing:-.012em">%s</p>
+      <p class="quote-by">%s</p>
+    </div>
     %s
   </div>
-  <div class="stack">%s%s</div>
-</article>""" % (n, headline, role, media, ps,
-                 '<div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.4rem">' + "".join('<span class="pill">%s</span>' % t for t in tags) + "</div>")
-
-
-cases_body = """
-""" + banner("Student case studies",
-             "Below students<br>and parents share<br>their <em>learning<br>experiences.</em>",
-             '<p class="lede" style="color:rgba(240,232,218,.82)">Richard Amoroso’s main goal is to share his love of music along with the hard work it took him to get where he is today. These are the students who did the work.</p>',
-             right_html='<ul class="ticks" style="margin-top:.4rem">@@tick@@Oberlin · Eastman · Indiana · Richmond · BU · Bard</li>@@tick@@Philadelphia Youth Orchestra · PMEA · RMF scholarships</li></ul>',
-             ) + """
-
-<section class="sec">
-  <div class="wrap">
-    <p class="idx">02 / 04</p>
-    <div class="stats" data-reveal style="margin-bottom:clamp(1rem,2vw,1.6rem)">
-      <div><b data-count="100" data-suffix="+">0</b><span>Students since 2004</span></div>
-      <div><b data-count="9" data-suffix=" schools">0</b><span>Conservatories &amp; universities placed into</span></div>
-      <div><b data-count="4" data-suffix=" yrs">0</b><span>Longest ongoing student</span></div>
-      <div><b>$0000s</b><span>Scholarship money awarded</span></div>
-    </div>
-""" + case(1, "Matt Brown", "Former Student · Musician, Teacher, Producer",
-           "Bow direction, like changing gears in a manual.",
-           "“Rich Amoroso is one of the best teachers I ever had. He is an exemplary musician who is equally gifted as a teacher. He is meticulous, discerning, creative, and has a wonderful sense of humor. He played a crucial part in making me the musician &amp; teacher I am today.”",
-           ["I will never forget the lesson in which he urged me to change my bow direction with the same attention to detail that a seasoned driver uses to shift through the gears of a manual transmission while negotiating a sports car through winding, mountain roads.",
-            "Matt Brown is a musician, teacher and producer based in Denver, Colorado. He has released four albums of old-time music on which he plays fiddle, banjo and guitar. His most recent recording is <em>On Big Shoulders</em> — a genre-spanning musical love letter to Chicago, with twelve Chicago musicians playing ten songs linked to the city. He conceived of and executive-produced the album, and played fiddle on one of its country tracks, while living and teaching in the Windy City."],
-           ["Denver, CO", "4 albums", "Fiddle · banjo · guitar", "Allograph Records"], "recital.jpg") + """
-""" + case(2, "Jessica Clough", "Former Student · Full scholarship to the University of Richmond",
-           "Violin stayed primary — and she still studied everything else.",
-           "“I can honestly say that studying violin with Rich changed my life. Not only did my musicianship develop significantly, but my passion and dedication grew deeper.”",
-           ["Music had always been a love of mine from an early age, but there was a shift when I began to take lessons from Rich. His own extremely high level of performance and disciplined practice filters effortlessly into his instruction — perfectly complemented by a supportive and encouraging approach, as well as his down-to-earth and gracious manner.",
-            "I was fortunate to receive a music scholarship which allowed me to attend the University of Richmond. It was a perfect fit: I could keep violin as a primary focus while also exploring other areas of study. Rich understood the value in that balance, and helped me navigate auditioning for scholarships at schools where both options were available.",
-            "My degrees in music and business led me to work for The Philadelphia Orchestra after graduating, and subsequently Virginia Tech's new Center for the Arts. I now work for a software company in California and teach yoga on the side, where I play violin in my classes and collaborate with other yogi musicians."],
-           ["Music + Business", "Full scholarship", "Philadelphia Orchestra staff", "Virginia Tech Center for the Arts"], "students.jpg") + """
-""" + case(3, "Crystal Kowalski", "Parent of Maria Kowalski — 4-year, full-tuition Berklee scholarship",
-           "“He was a stickler. I imagine he still is.”",
-           "“It is his unwavering demand for craftsmanship that will allow you to win auditions.”",
-           ["My daughter took weekly private lessons with Richard from the summer after sixth grade through high school graduation. During that time she participated in yearly merit scholarship auditions through the Reading Musical Foundation and had four auditions with the Berklee College of Music. She placed every year in RMF's merit scholarship competition, and in her senior year won the four-year college scholarship chosen across all instrumentalists and vocalists. The Berklee auditions provided full tuition for two years of the 5-week summer camp and full tuition for four years of undergraduate study.",
-            "I detail the scholarships because they are due in a very large part to Richard's instruction, expertise, attention to detail, and unwillingness to accept anything less than her absolute best. He was insistent on tone. He taught her to craft pieces so that they were not only polished but artistic. Every note was important and not one of them snuck by him if it were not exactly what he was looking for.",
-            "I highly recommend Richard Amoroso to any serious violin student preparing for music school."],
-           ["Berklee — full tuition", "RMF 4-year scholarship", "Weekly from grade 7", "Tone-first teaching"], None) + """
-""" + case(4, "Asher", "5 Year Student · Oberlin College and Conservatory",
-           "Efficiency that saved my hands, and the hours I would have wasted.",
-           "“I feel that I have saved myself from injury and from many wasted hours in the practice room because of Rich's teaching.”",
-           ["Richard was my teacher for five years, from eighth grade until I graduated high school. When I began studying with him I had not had formal lessons for several years, and there were many technical gaps that needed filling. Rich was the perfect teacher for that: as an extremely accomplished player who took an unusual path to a successful career, he has given a lot of thought to the practice process, discipline and attention to detail. He stresses efficiency and economy of motion, and encourages students to evaluate themselves not only on the success of a performance, but on how hard they worked to achieve it.",
-            "Although Rich is committed to technique and efficiency, he is anything but robotic. He has taught me to look for joy and pleasure in every piece I play, and has always encouraged me to dream big.",
-            "He was especially helpful when I was applying to college — choosing where to apply, planning auditions, selecting repertoire. I was admitted with scholarship to Eastman School of Music, University of Michigan, Boston University, Bard College and Conservatory, and Oberlin College and Conservatory. I chose Oberlin and was awarded the John F. Oberlin scholarship and the Conservatory Dean's scholarship."],
-           ["John F. Oberlin Scholarship", "Dean's Scholarship", "Eastman · Michigan · BU · Bard"], "left-hand.jpg") + """
-""" + case(5, "John", "Parent of Student · Son into the Philadelphia Youth Orchestra",
-           "“I don’t know much about music — but I can hear it.”",
-           "“When Mr. Amoroso is teaching, he is very thorough and detail-driven.”",
-           ["My son has improved significantly after starting to study with Mr. Amoroso just a little over a year ago. I don't know much about music, but I can tell the sound my son plays out now is so much better than in the past.",
-            "I usually sit in the lessons, and I see that when Mr. Amoroso is teaching he is very thorough and detail-driven. He once mentioned that he loved the power of the ocean — which might be why he is so energetic and passionate when he teaches. My son just made the Philadelphia Youth Orchestra, which he had dreamed about. That is an accomplishment he made after studying with Mr. Amoroso."],
-           ["Philadelphia Youth Orchestra", "Parent-observed lessons", "14 months"], None) + """
-""" + case(6, "Jamie", "Parent of Student · 6 Year Student",
-           "Practice smart — PMEA festivals, recitals and auditions.",
-           "“He cares not only about my daughter's technique and musical knowledge, but uses violin to teach her about determination, perseverance and love of music.”",
-           ["My daughter, Jamie, began taking lessons with Mr. Amoroso six years ago, when she was ten. She quickly progressed as she was shown proper technique and was inspired by his playing during her lessons and his performances with the Philadelphia Orchestra. After playing a few years, Jamie auditioned for an education program that eventually led her to participate in and play with the Philadelphia Youth Orchestra.",
-            "Mr. Amoroso challenges my daughter to “practice smart” and is always inspiring and encouraging her. He has prepared Jamie for several PMEA festivals, recitals and auditions."],
-           ["PMEA festivals", "Philadelphia Youth Orchestra", "6 years"], "bow-arm.jpg") + """
+  <div class="stack" style="gap:1.1rem">
+    %s
+    <div class="stack" style="gap:.9rem">%s</div>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.2rem">%s</div>
   </div>
-</section>
+</article>""" % (n, name, headline, quote, role, media, ps, pills)
 
-<section class="sec on-ink">
-  <div class="wrap">
-    <p class="idx">03 / 04</p>
-    <div class="g-split" style="align-items:center">
-      <div class="quote" data-reveal>
-        <p class="pull pull--wide" style="color:var(--on-ink)">“To discover more examples of Richard Amoroso's instructing results, check out the student performance and case study pages.”</p>
-      </div>
-      <div style="display:flex;gap:.8rem;flex-wrap:wrap;justify-content:flex-end" data-reveal>
-        <a class="btn btn--light" href="student-performances.html"><span>Hear them play</span>@@i:arrow@@</a>
-        <a class="btn btn--ghost" style="--fg:var(--on-ink);box-shadow:inset 0 0 0 1px var(--rule-on-ink)" href="contact.html"><span>Join the studio</span></a>
-      </div>
-    </div>
-  </div>
-</section>
-"""
-
-page("case-studies.html", "Student Case Studies — outcomes of the Amoroso Violin Studio",
-     "Students and parents of students of Richard Amoroso on what changed: scholarships to Oberlin, Eastman, Berklee and Richmond, Philadelphia Youth Orchestra placements and PMEA festivals.",
-     "case-studies.html", cases_body)
 
 # ============================================================ STUDENT PERFORMANCES
 def player(title, meta, dur, kind="Audio"):
