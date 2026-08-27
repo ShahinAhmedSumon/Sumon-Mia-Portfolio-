@@ -1,10 +1,10 @@
 /* ============================================================
-   Ahmed Sumon — Portfolio interactions
+   Ahmed Sumon - Portfolio interactions
    ============================================================ */
 (function () {
   "use strict";
 
-  /* ---------- Portfolio data (fallback — overridden by content.json) ---------- */
+  /* ---------- Portfolio data (fallback - overridden by content.json) ---------- */
   const projects = [
     { name: "Serve Flow Automation", domain: "serveflowautomation.com", url: "https://serveflowautomation.com/", cat: "business", featured: true,  desc: "Business and automation services website built for a professional service provider." },
     { name: "Quality Core Fence",    domain: "qualitycorefence.com",    url: "https://qualitycorefence.com/",    cat: "services", featured: true,  desc: "Company website for a fencing and outdoor services business." },
@@ -275,7 +275,7 @@
       return;
     }
 
-    const subject = encodeURIComponent("Project inquiry — " + type);
+    const subject = encodeURIComponent("Project inquiry - " + type);
     const body = encodeURIComponent(
       "Hi Ahmed,\n\n" +
       "My name: " + name + "\n" +

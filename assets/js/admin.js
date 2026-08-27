@@ -1,5 +1,5 @@
 /* ============================================================
-   admin.js — Site Dashboard logic
+   admin.js - Site Dashboard logic
    GitHub token login → edit content → save via GitHub API
    ============================================================ */
 (function () {
@@ -35,6 +35,10 @@
 
       /* Nav */
       navItems:     document.querySelectorAll(".nav-item[data-tab]"),
+
+      /* Site info */
+      siteTitle:    document.getElementById("siteTitle"),
+      siteTagline:  document.getElementById("siteTagline"),
 
       /* Save */
       saveBtn:      document.getElementById("saveBtn"),
@@ -292,7 +296,10 @@
       return r.json();
     })
     .then(function (file) {
-      var decoded = atob(file.content.replace(/\n/g, ""));
+      /* atob() returns raw bytes as a byte-string; decode it as UTF-8 so
+         non-ASCII characters survive the load/save round-trip unchanged */
+      var bin = atob(file.content.replace(/\n/g, ""));
+      var decoded = decodeURIComponent(escape(bin));
       return { content: JSON.parse(decoded), sha: file.sha };
     });
   }
@@ -303,11 +310,15 @@
   function populateForm() {
     var c = content;
 
+    /* Site info */
+    _val(els.siteTitle,   c.siteTitle   !== undefined ? c.siteTitle   : (c.meta && c.meta.title) || "");
+    _val(els.siteTagline, c.siteTagline !== undefined ? c.siteTagline : "");
+
     /* Overview stats */
     if (els.ovProjects) els.ovProjects.textContent = (c.projects || []).length;
     if (els.ovFaqs)     els.ovFaqs.textContent     = (c.faq || []).length;
     if (els.ovFeatured) els.ovFeatured.textContent  = (c.projects || []).filter(function (p) { return p.featured; }).length;
-    if (els.ovTheme)    els.ovTheme.textContent     = c.theme ? c.theme.accentColor : "—";
+    if (els.ovTheme)    els.ovTheme.textContent     = c.theme ? c.theme.accentColor : "-";
 
     /* Hero */
     if (c.hero) {
@@ -544,7 +555,7 @@
         return;
       }
       if (file.size > 2 * 1024 * 1024) {
-        toast("Image is too large — please pick one under 2 MB.", "warn");
+        toast("Image is too large - please pick one under 2 MB.", "warn");
         return;
       }
       readAndScale(file, cfg.maxDim, cfg.mime, cfg.quality)
@@ -553,7 +564,7 @@
           content.theme[cfg.key] = dataUri;
           renderUploadPreview(cfg);
           markUnsaved();
-          toast("Image ready — click Save Changes to publish it.", "success");
+          toast("Image ready - click Save Changes to publish it.", "success");
         })
         .catch(function () {
           toast("Could not read that image file.", "error");
@@ -631,6 +642,10 @@
   ================================================================ */
   function collectForm() {
     var c = JSON.parse(JSON.stringify(content)); /* deep clone */
+
+    /* Site info */
+    c.siteTitle   = _get(els.siteTitle);
+    c.siteTagline = _get(els.siteTagline);
 
     /* Hero */
     if (!c.hero) c.hero = {};
@@ -719,7 +734,7 @@
     .then(function (res) {
       contentSha = res.content.sha;
       content = updated;
-      setStatus("saved", "Saved ✓ — Pages rebuilding…");
+      setStatus("saved", "Saved ✓ - Pages rebuilding…");
       toast("Saved! GitHub Pages is rebuilding your site.", "success");
       populateForm();
     })

@@ -1,7 +1,9 @@
 {
+  "siteTitle": "Ahmed Sumon - Web Developer · WordPress, Shopify & SEO Specialist",
+  "siteTagline": "Web Developer / WordPress Developer",
   "meta": {
-    "title": "Ahmed Sumon Ã¢ÂÂ Web Developer ÃÂ· WordPress, Shopify & SEO Specialist",
-    "description": "Ahmed Sumon is a web developer with 3+ years of industry experience building WordPress, Shopify and custom websites Ã¢ÂÂ including eCommerce, SEO and performance optimisation Ã¢ÂÂ for international clients across many industries.",
+    "title": "Ahmed Sumon - Web Developer · WordPress, Shopify & SEO Specialist",
+    "description": "Ahmed Sumon is a web developer with 3+ years of industry experience building WordPress, Shopify and custom websites - including eCommerce, SEO and performance optimisation - for international clients across many industries.",
     "author": "Ahmed Sumon"
   },
   "hero": {
@@ -14,15 +16,15 @@
       "Shopify Developer",
       "SEO Specialist"
     ],
-    "intro": "Hi, I'm <strong>Ahmed Sumon</strong> Ã¢ÂÂ a web developer with 3+ years of industry experience building <strong>WordPress</strong>, <strong>Shopify</strong> and <strong>custom</strong> websites for international clients. From design and development to eCommerce, SEO and performance, I deliver complete digital solutions.",
+    "intro": "Hi, I'm <strong>Ahmed Sumon</strong> - a web developer with 3+ years of industry experience building <strong>WordPress</strong>, <strong>Shopify</strong> and <strong>custom</strong> websites for international clients. From design and development to eCommerce, SEO and performance, I deliver complete digital solutions.",
     "cta1": "See My Work",
     "cta2": "Let's Talk"
   },
   "about": {
     "tagline": "About Me",
     "headline": "Passionate developer. Reliable partner.",
-    "bio1": "I'm Ahmed Sumon, a web developer and digital specialist based in Bangladesh, working with clients worldwide. I bring together design thinking, solid code and growth-focused strategy to build websites that don't just look good Ã¢ÂÂ they perform.",
-    "bio2": "Over 3+ years I've built 21+ websites across e-commerce, SaaS, services and creative industries Ã¢ÂÂ each one crafted to meet real business goals, on time and on budget.",
+    "bio1": "I'm Ahmed Sumon, a web developer and digital specialist based in Bangladesh, working with clients worldwide. I bring together design thinking, solid code and growth-focused strategy to build websites that don't just look good - they perform.",
+    "bio2": "Over 3+ years I've built 21+ websites across e-commerce, SaaS, services and creative industries - each one crafted to meet real business goals, on time and on budget.",
     "stats": {
       "yearsExp": 3,
       "projects": 21,
@@ -43,7 +45,7 @@
     {
       "icon": "wordpress",
       "title": "WordPress Development",
-      "desc": "Custom themes, Elementor builds, WooCommerce stores and plugin integration Ã¢ÂÂ fast, secure and SEO-ready WordPress websites built to scale.",
+      "desc": "Custom themes, Elementor builds, WooCommerce stores and plugin integration - fast, secure and SEO-ready WordPress websites built to scale.",
       "features": [
         "Custom theme & Elementor builds",
         "WooCommerce & plugin integration",
@@ -54,7 +56,7 @@
     {
       "icon": "shopify",
       "title": "Shopify & eCommerce",
-      "desc": "Shopify store setup, theme customisation, app integration and conversion-focused design Ã¢ÂÂ everything you need to sell online effectively.",
+      "desc": "Shopify store setup, theme customisation, app integration and conversion-focused design - everything you need to sell online effectively.",
       "features": [
         "Shopify store setup & migration",
         "Theme customisation & design",
@@ -65,7 +67,7 @@
     {
       "icon": "custom",
       "title": "Custom Web Development",
-      "desc": "Hand-coded HTML, CSS and JavaScript websites and landing pages Ã¢ÂÂ no bloat, maximum speed, pixel-perfect on all devices.",
+      "desc": "Hand-coded HTML, CSS and JavaScript websites and landing pages - no bloat, maximum speed, pixel-perfect on all devices.",
       "features": [
         "Pixel-perfect responsive builds",
         "Vanilla JS interactions",
@@ -314,11 +316,11 @@
   "faq": [
     {
       "q": "What types of websites do you build?",
-      "a": "I build a wide range Ã¢ÂÂ from simple landing pages to complex eCommerce stores. My main focus is WordPress (including Elementor and WooCommerce), Shopify, and custom HTML/CSS/JS sites. I've worked with clients in services, retail, education, healthcare, creative industries and more."
+      "a": "I build a wide range - from simple landing pages to complex eCommerce stores. My main focus is WordPress (including Elementor and WooCommerce), Shopify, and custom HTML/CSS/JS sites. I've worked with clients in services, retail, education, healthcare, creative industries and more."
     },
     {
       "q": "How long does a typical project take?",
-      "a": "A simple landing page or small business website typically takes 1Ã¢ÂÂ2 weeks. A full WordPress or Shopify build with custom design usually takes 2Ã¢ÂÂ4 weeks. Larger or more complex projects may take longer Ã¢ÂÂ I'll give you a realistic timeline upfront during our initial discussion."
+      "a": "A simple landing page or small business website typically takes 1–2 weeks. A full WordPress or Shopify build with custom design usually takes 2–4 weeks. Larger or more complex projects may take longer - I'll give you a realistic timeline upfront during our initial discussion."
     },
     {
       "q": "Do you offer ongoing support after launch?",
@@ -330,7 +332,7 @@
     },
     {
       "q": "What information do you need to get started?",
-      "a": "A brief overview of your business, your goals for the website, any examples of sites you like, your target audience and your rough timeline. If you have existing branding (logo, colours, fonts) that's helpful too Ã¢ÂÂ but not required. We can figure out the details together."
+      "a": "A brief overview of your business, your goals for the website, any examples of sites you like, your target audience and your rough timeline. If you have existing branding (logo, colours, fonts) that's helpful too - but not required. We can figure out the details together."
     }
   ],
   "contact": {
