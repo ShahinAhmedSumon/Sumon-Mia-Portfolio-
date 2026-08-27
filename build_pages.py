@@ -452,14 +452,13 @@ story_body = """
                 "My dad was an audiophile and constantly had music playing to test his components — mostly symphonic. Just by living in that house I received a great musical education, plus the normal father/son arguments about my practice habits.") + """
         """ + tl("1984", "Greenfield Competition",
                 "My greatest accomplishment in my youth: at twelve, I won the Philadelphia Orchestra's Student Competition (now the Albert M. Greenfield Competition). The prize was a solo with the Orchestra — the following year I played the first movement of Mozart's Fourth Concerto at the Academy of Music.",
-                "young-richard.jpg", "Soloist on the Academy of Music stage") + """
+                "recital.jpg", "A youth soloist with orchestra") + """
         """ + tl("1986", "Norman Carol",
                 "In high school I took lessons with the Orchestra's retired Concertmaster, played chamber ensembles and Philadelphia Youth Orchestra, and studied piano — while still not considering myself dedicated or passionate about practising.") + """
         """ + tl("1988", "Not music school",
                 "At the end of high school I truly did not know what to do. I had the ability and could have gone to music school, but for whatever reason I chose not to. Neither Norman Carol nor my father pushed me. To this day I can't explain it.") + """
         """ + tl("1990", "Villanova → Dickinson",
-                "Two years at Villanova, initially as an Electrical Engineering major (I nearly failed Calculus), then Accounting. I transferred to Dickinson College and graduated in Economics — in four years total, so it cost my parents nothing extra.",
-                "young-richard.jpg", "Dickinson College years") + """
+                "Two years at Villanova, initially as an Electrical Engineering major (I nearly failed Calculus), then Accounting. I transferred to Dickinson College and graduated in Economics — in four years total, so it cost my parents nothing extra.") + """
         """ + tl("1992", "Telemarketer",
                 "After Dickinson I had no passion for the jobs I was interviewing for. My lowest point was taking a job as a telemarketer. In between, part-time work at a golf course, where I became a half-decent golfer.") + """
         """ + tl("1993", "Back to school — to teach",
