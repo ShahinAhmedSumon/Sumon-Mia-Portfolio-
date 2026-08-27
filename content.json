@@ -135,6 +135,9 @@
     "accentColor": "#7c8cff",
     "bgColor": "#080a12",
     "logoText": "Ahmed Sumon",
-    "logoMark": "A"
+    "logoMark": "A",
+    "profilePhoto": "",
+    "logoImage": "",
+    "faviconImage": ""
   }
 }

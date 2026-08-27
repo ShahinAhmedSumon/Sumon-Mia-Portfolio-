@@ -65,6 +65,40 @@
           t.innerHTML = c.theme.logoText.replace(" ", "&nbsp;");
         });
       }
+      /* Logo image — replaces the text logo mark when set */
+      if (c.theme.logoImage) {
+        var markEl = document.querySelector(".logo .logo-mark");
+        if (markEl) {
+          var logoImg = document.createElement("img");
+          logoImg.src = c.theme.logoImage;
+          logoImg.alt = (c.theme.logoText || "Logo");
+          logoImg.className = "logo-img";
+          markEl.innerHTML = "";
+          markEl.appendChild(logoImg);
+        }
+      }
+      /* Favicon — swaps the browser-tab icon when set */
+      if (c.theme.faviconImage) {
+        var fav = document.querySelector("link[rel='icon']");
+        if (!fav) {
+          fav = document.createElement("link");
+          fav.rel = "icon";
+          document.head.appendChild(fav);
+        }
+        fav.href = c.theme.faviconImage;
+      }
+      /* Profile photo — replaces the About card monogram when set */
+      if (c.theme.profilePhoto) {
+        var mono = document.querySelector(".about-monogram");
+        if (mono) {
+          var photo = document.createElement("img");
+          photo.src = c.theme.profilePhoto;
+          photo.alt = (c.meta && c.meta.author) ? c.meta.author : "Profile photo";
+          photo.className = "about-photo";
+          mono.innerHTML = "";
+          mono.appendChild(photo);
+        }
+      }
     }
 
     /* Dispatch event so main.js can use updated content */
