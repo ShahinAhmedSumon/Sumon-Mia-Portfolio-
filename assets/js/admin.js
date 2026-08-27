@@ -90,6 +90,22 @@
       themePreview: document.getElementById("themePreview"),
       logoPreview:  document.getElementById("logoPreview"),
 
+      /* Image uploads (Theme tab) */
+      profileFile:       document.getElementById("profileFile"),
+      profilePreview:    document.getElementById("profilePreview"),
+      profileUploadBtn:  document.getElementById("profileUploadBtn"),
+      profileRemoveBtn:  document.getElementById("profileRemoveBtn"),
+
+      logoFile:       document.getElementById("logoFile"),
+      logoImgPreview: document.getElementById("logoImgPreview"),
+      logoUploadBtn:  document.getElementById("logoUploadBtn"),
+      logoRemoveBtn:  document.getElementById("logoRemoveBtn"),
+
+      faviconFile:       document.getElementById("faviconFile"),
+      faviconPreview:    document.getElementById("faviconPreview"),
+      faviconUploadBtn:  document.getElementById("faviconUploadBtn"),
+      faviconRemoveBtn:  document.getElementById("faviconRemoveBtn"),
+
       /* Modals */
       projectModal:      document.getElementById("projectModal"),
       projectModalTitle: document.getElementById("projectModalTitle"),
@@ -148,6 +164,41 @@
     /* Theme live preview */
     [els.themeAccent, els.themeBg, els.themeLogoMark, els.themeLogoText].forEach(function (el) {
       if (el) el.addEventListener("input", updateThemePreview);
+    });
+
+    /* Image uploads (Theme tab) */
+    setupImageUpload({
+      key: "profilePhoto",
+      fileInput: els.profileFile,
+      preview: els.profilePreview,
+      uploadBtn: els.profileUploadBtn,
+      removeBtn: els.profileRemoveBtn,
+      maxDim: 512,
+      mime: "image/jpeg",
+      quality: 0.85,
+      placeholder: "👤"
+    });
+    setupImageUpload({
+      key: "logoImage",
+      fileInput: els.logoFile,
+      preview: els.logoImgPreview,
+      uploadBtn: els.logoUploadBtn,
+      removeBtn: els.logoRemoveBtn,
+      maxDim: 256,
+      mime: "image/png",
+      quality: 1,
+      placeholder: "🏷"
+    });
+    setupImageUpload({
+      key: "faviconImage",
+      fileInput: els.faviconFile,
+      preview: els.faviconPreview,
+      uploadBtn: els.faviconUploadBtn,
+      removeBtn: els.faviconRemoveBtn,
+      maxDim: 64,
+      mime: "image/png",
+      quality: 1,
+      placeholder: "★"
     });
 
     /* Project modal */
@@ -303,6 +354,9 @@
       _val(els.themeLogoText, c.theme.logoText);
       updateThemePreview();
     }
+
+    /* Image upload previews */
+    refreshUploadPreviews();
 
     /* Projects */
     renderProjectList();
@@ -466,6 +520,113 @@
   }
 
   /* ================================================================
+     IMAGE UPLOADS (Theme tab)
+     Each widget reads a local file, downscales it on a canvas and
+     stores the result as a data URI inside content.theme[key].
+  ================================================================ */
+  var uploadWidgets = [];
+
+  function setupImageUpload(cfg) {
+    if (!cfg.fileInput || !cfg.preview) return;
+    cfg.label = cfg.uploadBtn.textContent.trim();
+    uploadWidgets.push(cfg);
+
+    cfg.uploadBtn.addEventListener("click", function () {
+      cfg.fileInput.value = "";
+      cfg.fileInput.click();
+    });
+
+    cfg.fileInput.addEventListener("change", function () {
+      var file = cfg.fileInput.files && cfg.fileInput.files[0];
+      if (!file) return;
+      if (!/^image\//.test(file.type)) {
+        toast("Please choose an image file (PNG, JPG, WebP…).", "warn");
+        return;
+      }
+      if (file.size > 2 * 1024 * 1024) {
+        toast("Image is too large — please pick one under 2 MB.", "warn");
+        return;
+      }
+      readAndScale(file, cfg.maxDim, cfg.mime, cfg.quality)
+        .then(function (dataUri) {
+          if (!content.theme) content.theme = {};
+          content.theme[cfg.key] = dataUri;
+          renderUploadPreview(cfg);
+          markUnsaved();
+          toast("Image ready — click Save Changes to publish it.", "success");
+        })
+        .catch(function () {
+          toast("Could not read that image file.", "error");
+        });
+    });
+
+    cfg.removeBtn.addEventListener("click", function () {
+      if (!content.theme || !content.theme[cfg.key]) return;
+      if (!confirm("Remove this image?")) return;
+      content.theme[cfg.key] = "";
+      renderUploadPreview(cfg);
+      markUnsaved();
+    });
+
+    renderUploadPreview(cfg);
+  }
+
+  /* Read a File, downscale so the longest edge is <= maxDim,
+     and return a data URI in the target format. */
+  function readAndScale(file, maxDim, mime, quality) {
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onerror = reject;
+      reader.onload = function () {
+        var img = new Image();
+        img.onerror = reject;
+        img.onload = function () {
+          var w = img.naturalWidth  || img.width;
+          var h = img.naturalHeight || img.height;
+          var scale = Math.min(1, maxDim / Math.max(w, h));
+          var cw = Math.max(1, Math.round(w * scale));
+          var ch = Math.max(1, Math.round(h * scale));
+          var canvas = document.createElement("canvas");
+          canvas.width  = cw;
+          canvas.height = ch;
+          var ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, cw, ch);
+          try {
+            resolve(canvas.toDataURL(mime, quality));
+          } catch (e) {
+            reject(e);
+          }
+        };
+        img.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function renderUploadPreview(cfg) {
+    var value = content && content.theme ? (content.theme[cfg.key] || "") : "";
+    if (value) {
+      cfg.preview.innerHTML = "";
+      var img = document.createElement("img");
+      img.src = value;
+      img.alt = cfg.key;
+      cfg.preview.appendChild(img);
+      cfg.preview.classList.add("has-image");
+      cfg.uploadBtn.textContent = "Replace";
+      cfg.removeBtn.style.display = "inline-flex";
+    } else {
+      cfg.preview.innerHTML = '<span class="upload-placeholder">' + (cfg.placeholder || "🖼") + "</span>";
+      cfg.preview.classList.remove("has-image");
+      cfg.uploadBtn.textContent = cfg.label;
+      cfg.removeBtn.style.display = "none";
+    }
+  }
+
+  function refreshUploadPreviews() {
+    uploadWidgets.forEach(renderUploadPreview);
+  }
+
+  /* ================================================================
      COLLECT FORM → content object
   ================================================================ */
   function collectForm() {
@@ -511,6 +672,11 @@
     c.theme.bgColor     = _get(els.themeBg);
     c.theme.logoMark    = _get(els.themeLogoMark);
     c.theme.logoText    = _get(els.themeLogoText);
+
+    /* Images (data URIs edited in-place via upload widgets) */
+    c.theme.profilePhoto  = (c.theme.profilePhoto  || "");
+    c.theme.logoImage     = (c.theme.logoImage     || "");
+    c.theme.faviconImage  = (c.theme.faviconImage  || "");
 
     /* projects & faq already updated in-place */
     return c;
