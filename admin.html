@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Site Dashboard — Ahmed Sumon Portfolio</title>
+  <title>Site Dashboard - Ahmed Sumon Portfolio</title>
   <meta name="robots" content="noindex, nofollow" />
 
   <!-- Fonts -->
@@ -27,7 +27,7 @@
       <span>A<span class="dot">.</span></span>
       <span>Site Dashboard</span>
     </div>
-    <p class="login-subtitle">Ahmed Sumon Portfolio — Admin Panel</p>
+    <p class="login-subtitle">Ahmed Sumon Portfolio - Admin Panel</p>
 
     <label class="login-label" for="tokenInput">GitHub Personal Access Token</label>
     <input
@@ -65,6 +65,10 @@
       <button class="nav-item" data-tab="overview">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
         Overview
+      </button>
+      <button class="nav-item" data-tab="siteinfo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        Site Info
       </button>
       <button class="nav-item" data-tab="hero">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -112,19 +116,19 @@
 
       <div class="stats-grid">
         <div class="stat-card">
-          <div class="stat-value" id="ovProjects">—</div>
+          <div class="stat-value" id="ovProjects">-</div>
           <div class="stat-label">Projects</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value" id="ovFeatured">—</div>
+          <div class="stat-value" id="ovFeatured">-</div>
           <div class="stat-label">Featured</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value" id="ovFaqs">—</div>
+          <div class="stat-value" id="ovFaqs">-</div>
           <div class="stat-label">FAQ Items</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value" id="ovTheme" style="font-size:18px">—</div>
+          <div class="stat-value" id="ovTheme" style="font-size:18px">-</div>
           <div class="stat-label">Accent Colour</div>
         </div>
       </div>
@@ -136,7 +140,7 @@
         </div>
         <p style="color:var(--muted);font-size:14px;line-height:1.8;">
           Edit any section using the navigation on the left, then click <strong style="color:var(--text)">Save Changes</strong> at the bottom.
-          The dashboard commits <code style="color:var(--accent);font-family:monospace">content.json</code> directly to GitHub via the API — GitHub Pages automatically rebuilds your site within a minute or two.
+          The dashboard commits <code style="color:var(--accent);font-family:monospace">content.json</code> directly to GitHub via the API - GitHub Pages automatically rebuilds your site within a minute or two.
           <br><br>
           <strong style="color:var(--text)">Tip:</strong> Your GitHub Personal Access Token is stored only in this browser tab's session memory and is never sent anywhere except GitHub's own API.
         </p>
@@ -152,6 +156,35 @@
           <a href="https://shahinahmedsumon.github.io/Sumon-Mia-Portfolio-/content.json" target="_blank" rel="noopener" style="color:var(--accent);font-size:14px;text-decoration:none;">📄 content.json →</a>
           <a href="https://github.com/ShahinAhmedSumon/Sumon-Mia-Portfolio-/actions" target="_blank" rel="noopener" style="color:var(--accent);font-size:14px;text-decoration:none;">⚙ GitHub Actions →</a>
         </div>
+      </div>
+    </section>
+
+
+    <!-- ==== SITE INFO ==== -->
+    <section class="tab-section" data-tab="siteinfo">
+      <div class="page-header">
+        <h1 class="page-title">Site Info</h1>
+        <p class="page-desc">Your site's title and tagline.</p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          Site identity
+        </div>
+
+        <div class="field">
+          <label>Site title</label>
+          <input type="text" id="siteTitle" placeholder="Ahmed Sumon - Web Developer" />
+        </div>
+        <div class="field">
+          <label>Site tagline</label>
+          <input type="text" id="siteTagline" placeholder="Web Developer / WordPress Developer" />
+        </div>
+        <p style="color:var(--muted);font-size:13px;margin:-6px 0 0;">
+          The site title is used for the browser tab and search-engine results.
+          The tagline is shown under your name on the About card.
+        </p>
       </div>
     </section>
 

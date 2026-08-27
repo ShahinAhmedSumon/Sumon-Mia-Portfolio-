@@ -1,5 +1,5 @@
 /* ============================================================
-   content.js — Load content.json and expose as window.__CONTENT__
+   content.js - Load content.json and expose as window.__CONTENT__
    Falls back gracefully if content.json is unavailable.
    ============================================================ */
 (function () {
@@ -27,6 +27,17 @@
         var dm = document.querySelector("meta[name='description']");
         if (dm) dm.content = c.meta.description;
       }
+    }
+
+    /* ---- Site info (edited via the Site Info tab in the dashboard) ---- */
+    if (c.siteTitle) {
+      document.title = c.siteTitle;
+      var ogTitle = document.querySelector("meta[property='og:title']");
+      if (ogTitle) ogTitle.content = c.siteTitle;
+    }
+    if (c.siteTagline) {
+      var roleEl = document.querySelector(".about-role");
+      if (roleEl) roleEl.textContent = c.siteTagline;
     }
 
     /* ---- Hero ---- */
@@ -65,7 +76,7 @@
           t.innerHTML = c.theme.logoText.replace(" ", "&nbsp;");
         });
       }
-      /* Logo image — replaces the text logo mark when set */
+      /* Logo image - replaces the text logo mark when set */
       if (c.theme.logoImage) {
         var markEl = document.querySelector(".logo .logo-mark");
         if (markEl) {
@@ -77,7 +88,7 @@
           markEl.appendChild(logoImg);
         }
       }
-      /* Favicon — swaps the browser-tab icon when set */
+      /* Favicon - swaps the browser-tab icon when set */
       if (c.theme.faviconImage) {
         var fav = document.querySelector("link[rel='icon']");
         if (!fav) {
@@ -87,7 +98,7 @@
         }
         fav.href = c.theme.faviconImage;
       }
-      /* Profile photo — replaces the About card monogram when set */
+      /* Profile photo - replaces the About card monogram when set */
       if (c.theme.profilePhoto) {
         var mono = document.querySelector(".about-monogram");
         if (mono) {
@@ -96,6 +107,7 @@
           photo.alt = (c.meta && c.meta.author) ? c.meta.author : "Profile photo";
           photo.className = "about-photo";
           mono.innerHTML = "";
+          mono.classList.add("has-photo"); /* bigger photo frame */
           mono.appendChild(photo);
         }
       }
