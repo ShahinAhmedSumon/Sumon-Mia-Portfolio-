@@ -49,8 +49,7 @@
   <header class="nav" id="nav">
     <div class="container nav-inner">
       <a href="#home" class="logo" aria-label="Ahmed Sumon - home">
-        <span class="logo-mark">A<span class="logo-dot">.</span></span>
-        <span class="logo-text">Ahmed&nbsp;Sumon</span>
+        <img class="logo-img" src="assets/img/logo.svg" alt="Ahmed Sumon" />
       </a>
 
       <nav class="nav-links" id="navLinks" aria-label="Primary">
@@ -61,6 +60,15 @@
         <a href="#process" class="nav-link">Process</a>
         <a href="#faq" class="nav-link">FAQ</a>
         <a href="#contact" class="btn btn-primary btn-small nav-cta">Let's Talk</a>
+
+        <div class="nav-social" aria-label="Social links">
+          <a class="social-icon" data-social="facebook" href="https://www.facebook.com/sahinaahmed.sumon.5" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a class="social-icon" data-social="whatsapp" href="https://wa.me/8801867473337" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          </a>
+        </div>
       </nav>
 
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
@@ -439,31 +447,89 @@
     <!-- ===================== PROCESS ===================== -->
     <section class="section" id="process">
       <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">07 · How I Work</span>
-          <h2 class="section-title">A clear process,<br /><span class="accent">from idea to launch.</span></h2>
-        </div>
+        <div class="buildlog">
+          <div class="buildlog-intro reveal-left">
+            <span class="eyebrow">07 · How I Work</span>
+            <h2 class="section-title">No black box.<br /><span class="accent">A live build log.</span></h2>
+            <p class="buildlog-lead">
+              Most "our process" sections say the same four words: discover, design,
+              develop, deliver. Mine works like a real terminal log - you see exactly
+              what happens, when it happens, and what you get at every step.
+            </p>
+            <ul class="buildlog-facts">
+              <li>Fixed quote before any work starts</li>
+              <li>A clickable link in the first week</li>
+              <li>One person, zero handoffs</li>
+              <li>You own everything we build</li>
+            </ul>
+          </div>
 
-        <div class="process-steps">
-          <div class="step reveal-up">
-            <span class="step-num">1</span>
-            <h3>Discover</h3>
-            <p>We talk about your business, your audience and what the website needs to achieve. Clear goals first, design second.</p>
-          </div>
-          <div class="step reveal-up">
-            <span class="step-num">2</span>
-            <h3>Design</h3>
-            <p>A clean, modern design direction that fits your brand and industry - built to look premium and guide visitors toward action.</p>
-          </div>
-          <div class="step reveal-up">
-            <span class="step-num">3</span>
-            <h3>Develop</h3>
-            <p>I build the site with WordPress, Shopify or custom code - responsive on every device, fast, and easy for you to manage.</p>
-          </div>
-          <div class="step reveal-up">
-            <span class="step-num">4</span>
-            <h3>Launch &amp; Grow</h3>
-            <p>After launch I make sure it performs - speed, SEO and the technical details that help your site get found and convert.</p>
+          <div class="buildlog-terminal reveal-right" aria-label="Project build log">
+            <div class="buildlog-head">
+              <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+              <span class="buildlog-path">ahmed@sumon: ~/clients/your-project</span>
+              <span class="buildlog-badge"><span class="pulse"></span> build in progress</span>
+            </div>
+
+            <div class="buildlog-body">
+              <div class="buildlog-entry">
+                <div class="buildlog-rail"><span class="buildlog-node"></span></div>
+                <div class="buildlog-content">
+                  <div class="buildlog-meta">
+                    <span class="buildlog-hash">f3a91c2</span>
+                    <span class="buildlog-branch">main</span>
+                    <span class="buildlog-day">Day 01-03</span>
+                  </div>
+                  <h3 class="buildlog-title">The call where I mostly listen</h3>
+                  <p class="buildlog-desc">We talk through your business, your audience and what the site has to do. You get questions, not a sales pitch - and a clear plan for what we're building together.</p>
+                  <p class="buildlog-deliver">→ you get: a scoped plan and a fixed quote</p>
+                </div>
+              </div>
+
+              <div class="buildlog-entry">
+                <div class="buildlog-rail"><span class="buildlog-node"></span></div>
+                <div class="buildlog-content">
+                  <div class="buildlog-meta">
+                    <span class="buildlog-hash">7d24e08</span>
+                    <span class="buildlog-branch">main</span>
+                    <span class="buildlog-day">Day 04-08</span>
+                  </div>
+                  <h3 class="buildlog-title">You click a real link early</h3>
+                  <p class="buildlog-desc">A live staging link lands in your inbox within the first week. You watch the real site take shape and give feedback while it's easy to change - no waiting for a big reveal.</p>
+                  <p class="buildlog-deliver">→ you get: a staging link to click around</p>
+                </div>
+              </div>
+
+              <div class="buildlog-entry">
+                <div class="buildlog-rail"><span class="buildlog-node"></span></div>
+                <div class="buildlog-content">
+                  <div class="buildlog-meta">
+                    <span class="buildlog-hash">b58c7f1</span>
+                    <span class="buildlog-branch">main</span>
+                    <span class="buildlog-day">Week 02-03</span>
+                  </div>
+                  <h3 class="buildlog-title">One person builds it all</h3>
+                  <p class="buildlog-desc">Design, development, copy, SEO and launch - it's all me. No handoffs between designers and developers, no telephone game, and nothing lost in translation.</p>
+                  <p class="buildlog-deliver">→ you get: the whole build, from one developer</p>
+                </div>
+              </div>
+
+              <div class="buildlog-entry is-last">
+                <div class="buildlog-rail"><span class="buildlog-node"></span></div>
+                <div class="buildlog-content">
+                  <div class="buildlog-meta">
+                    <span class="buildlog-hash">e9f01a4</span>
+                    <span class="buildlog-branch release">release</span>
+                    <span class="buildlog-day">Launch day</span>
+                  </div>
+                  <h3 class="buildlog-title">Launch is the midpoint</h3>
+                  <p class="buildlog-desc">The site goes live on your domain - and that's where the real work begins. Monitoring, tweaks and performance checks keep it fast and earning its keep.</p>
+                  <p class="buildlog-deliver">→ you get: a live site plus post-launch care</p>
+                </div>
+              </div>
+
+              <div class="buildlog-passed">✔ build passed · site live on your domain<span class="typing-caret"></span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -616,9 +682,8 @@
   <!-- ===================== FOOTER ===================== -->
   <footer class="footer">
     <div class="container footer-inner">
-      <a href="#home" class="logo">
-        <span class="logo-mark">A<span class="logo-dot">.</span></span>
-        <span class="logo-text">Ahmed&nbsp;Sumon</span>
+      <a href="#home" class="logo" aria-label="Ahmed Sumon - home">
+        <img class="logo-img" src="assets/img/logo.svg" alt="Ahmed Sumon" />
       </a>
       <p class="footer-tag">Web Developer · WordPress · Shopify · SEO</p>
       <div class="footer-links">
@@ -626,6 +691,14 @@
         <a href="#work">Work</a>
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-social" aria-label="Social links">
+        <a class="social-icon" data-social="facebook" href="https://www.facebook.com/sahinaahmed.sumon.5" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a class="social-icon" data-social="whatsapp" href="https://wa.me/8801867473337" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        </a>
       </div>
       <a href="mailto:ahmedsumonshahin645@gmail.com" class="footer-email">ahmedsumonshahin645@gmail.com</a>
       <p class="footer-copy">© <span id="year"></span> Ahmed Sumon. Built with care.</p>

@@ -40,6 +40,13 @@
       siteTitle:    document.getElementById("siteTitle"),
       siteTagline:  document.getElementById("siteTagline"),
 
+      /* Social links (Site Info tab) */
+      socialFacebook:  document.getElementById("socialFacebook"),
+      socialWhatsapp:  document.getElementById("socialWhatsapp"),
+      socialFbPreview: document.querySelector('#socialPreview .social-icon[data-social="facebook"]'),
+      socialWaPreview: document.querySelector('#socialPreview .social-icon[data-social="whatsapp"]'),
+      socialPreviewNote: document.getElementById("socialPreviewNote"),
+
       /* Save */
       saveBtn:      document.getElementById("saveBtn"),
       saveStatus:   document.getElementById("saveStatus"),
@@ -89,10 +96,7 @@
       /* Theme */
       themeAccent:  document.getElementById("themeAccent"),
       themeBg:      document.getElementById("themeBg"),
-      themeLogoMark:document.getElementById("themeLogoMark"),
-      themeLogoText:document.getElementById("themeLogoText"),
       themePreview: document.getElementById("themePreview"),
-      logoPreview:  document.getElementById("logoPreview"),
 
       /* Image uploads (Theme tab) */
       profileFile:       document.getElementById("profileFile"),
@@ -166,8 +170,13 @@
     els.saveBtn.addEventListener("click", saveContent);
 
     /* Theme live preview */
-    [els.themeAccent, els.themeBg, els.themeLogoMark, els.themeLogoText].forEach(function (el) {
+    [els.themeAccent, els.themeBg].forEach(function (el) {
       if (el) el.addEventListener("input", updateThemePreview);
+    });
+
+    /* Social links live preview */
+    [els.socialFacebook, els.socialWhatsapp].forEach(function (el) {
+      if (el) el.addEventListener("input", updateSocialPreview);
     });
 
     /* Image uploads (Theme tab) */
@@ -314,6 +323,13 @@
     _val(els.siteTitle,   c.siteTitle   !== undefined ? c.siteTitle   : (c.meta && c.meta.title) || "");
     _val(els.siteTagline, c.siteTagline !== undefined ? c.siteTagline : "");
 
+    /* Social links */
+    if (c.social) {
+      _val(els.socialFacebook, c.social.facebook);
+      _val(els.socialWhatsapp, c.social.whatsapp);
+    }
+    updateSocialPreview();
+
     /* Overview stats */
     if (els.ovProjects) els.ovProjects.textContent = (c.projects || []).length;
     if (els.ovFaqs)     els.ovFaqs.textContent     = (c.faq || []).length;
@@ -361,8 +377,6 @@
     if (c.theme) {
       _val(els.themeAccent,   c.theme.accentColor);
       _val(els.themeBg,       c.theme.bgColor);
-      _val(els.themeLogoMark, c.theme.logoMark);
-      _val(els.themeLogoText, c.theme.logoText);
       updateThemePreview();
     }
 
@@ -523,11 +537,56 @@
     if (!els.themePreview) return;
     var bg     = els.themeBg     ? els.themeBg.value     : "#080a12";
     var accent = els.themeAccent ? els.themeAccent.value : "#7c8cff";
-    var mark   = els.themeLogoMark ? els.themeLogoMark.value : "A";
-    var text   = els.themeLogoText ? els.themeLogoText.value : "Ahmed Sumon";
     els.themePreview.style.background = bg;
     els.themePreview.style.color      = accent;
-    els.themePreview.textContent      = mark + ". " + text;
+    els.themePreview.textContent      = "Ahmed Sumon";
+  }
+
+  /* ================================================================
+     SOCIAL LINKS PREVIEW
+     Dims the icons whose field is empty, so it mirrors the live site.
+  ================================================================ */
+  function updateSocialPreview() {
+    if (!els.socialFbPreview || !els.socialWaPreview) return;
+    var fb = els.socialFacebook ? els.socialFacebook.value.trim() : "";
+    var wa = els.socialWhatsapp ? els.socialWhatsapp.value.trim() : "";
+    els.socialFbPreview.classList.toggle("is-dim", !fb);
+    els.socialWaPreview.classList.toggle("is-dim", !wa);
+    if (els.socialPreviewNote) {
+      els.socialPreviewNote.textContent = (fb || wa)
+        ? "Icons will show in the footer and mobile menu"
+        : "Empty - social icons stay hidden on your site";
+    }
+  }
+
+  /* ================================================================
+     WHATSAPP NORMALISER
+     Accepts "01867-473337", "8801867473337", a wa.me link or any full
+     URL, and returns a canonical https://wa.me/<country-code><number>
+     link (Bangladesh numbers get the 880 country code).
+  ================================================================ */
+  function normalizeWhatsapp(v) {
+    if (v === undefined || v === null) return "";
+    var s = String(v).trim();
+    if (!s) return "";
+
+    /* Extract a digit string: from a plain number or from a URL */
+    var digits = "";
+    var urlMatch = s.match(/(?:wa\.me\/)?\+?(\d[\d\s\-()]*)/i);
+    if (/^https?:\/\//i.test(s)) {
+      digits = urlMatch ? urlMatch[1].replace(/\D/g, "") : "";
+      if (!digits) return s; /* no recognisable number - keep as typed */
+    } else {
+      digits = s.replace(/\D/g, "");
+      if (!digits) return "";
+    }
+
+    if (/^00/.test(digits)) {
+      digits = digits.replace(/^00/, ""); /* 00880... -> 880... */
+    } else if (/^0/.test(digits) && !/^880/.test(digits)) {
+      digits = "88" + digits; /* 01867... -> 8801867... */
+    }
+    return "https://wa.me/" + digits;
   }
 
   /* ================================================================
@@ -681,12 +740,19 @@
     c.contact.responseTime = _get(els.contactResponse);
     c.contact.availability = _get(els.contactAvail);
 
+    /* Social links (stored as digits for WhatsApp, in +880 format) */
+    if (!c.social) c.social = {};
+    c.social.facebook = _get(els.socialFacebook);
+    var wa = normalizeWhatsapp(_get(els.socialWhatsapp));
+    c.social.whatsapp = wa ? wa.replace(/^https:\/\/wa\.me\//i, "") : "";
+
     /* Theme */
     if (!c.theme) c.theme = {};
     c.theme.accentColor = _get(els.themeAccent);
     c.theme.bgColor     = _get(els.themeBg);
-    c.theme.logoMark    = _get(els.themeLogoMark);
-    c.theme.logoText    = _get(els.themeLogoText);
+    /* Text logo keys are gone - strip them so no stale copy survives a save */
+    delete c.theme.logoMark;
+    delete c.theme.logoText;
 
     /* Images (data URIs edited in-place via upload widgets) */
     c.theme.profilePhoto  = (c.theme.profilePhoto  || "");
