@@ -4,7 +4,7 @@
 (function () {
   "use strict";
 
-  /* ---------- Portfolio data ---------- */
+  /* ---------- Portfolio data (fallback — overridden by content.json) ---------- */
   const projects = [
     { name: "Serve Flow Automation", domain: "serveflowautomation.com", url: "https://serveflowautomation.com/", cat: "business", featured: true,  desc: "Business and automation services website built for a professional service provider." },
     { name: "Quality Core Fence",    domain: "qualitycorefence.com",    url: "https://qualitycorefence.com/",    cat: "services", featured: true,  desc: "Company website for a fencing and outdoor services business." },
@@ -297,5 +297,24 @@
   });
 
   /* ---------- Initial render ---------- */
-  renderProjects("all");
+  /* If content.json loaded via content.js, use its project list */
+  function initRender() {
+    if (window.__CONTENT__ && window.__CONTENT__.projects && window.__CONTENT__.projects.length) {
+      /* Replace the static array with content.json data */
+      projects.length = 0;
+      window.__CONTENT__.projects.forEach(function (p) { projects.push(p); });
+    }
+    renderProjects("all");
+  }
+
+  /* content.js may load asynchronously; wait for it if needed */
+  if (window.__CONTENT__ !== undefined) {
+    initRender();
+  } else {
+    document.addEventListener("contentLoaded", initRender, { once: true });
+    /* Safety: also render immediately so the page isn't blank if content.js fails */
+    setTimeout(function () {
+      if (!document.querySelector(".work-card")) initRender();
+    }, 2000);
+  }
 })();
