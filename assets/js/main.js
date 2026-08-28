@@ -318,3 +318,243 @@
     }, 2000);
   }
 })();
+
+/* ==========================================================================
+   Bug Squash - live mini game inside the build log section
+   ========================================================================== */
+(function () {
+  "use strict";
+
+  var root = document.getElementById("bugSquash");
+  if (!root) return;
+
+  var board = document.getElementById("gameBoard");
+  var overlay = document.getElementById("gameOverlay");
+  var overlayTitle = document.getElementById("gameOverlayTitle");
+  var overlayMsg = document.getElementById("gameOverlayMsg");
+  var startBtn = document.getElementById("gameStartBtn");
+  var integrityBar = document.getElementById("gameIntegrity");
+  var integrityWrap = integrityBar ? integrityBar.closest(".game-integrity") : null;
+  var integrityLabel = document.getElementById("gameIntegrityLabel");
+  var scoreEl = document.getElementById("gameScore");
+  var comboEl = document.getElementById("gameCombo");
+  var bestEl = document.getElementById("gameBest");
+  if (!board || !overlay || !startBtn) return;
+
+  var SLOTS = 12;
+  var BEST_KEY = "as-buildlog-best";
+
+  var slots = [];
+  var running = false;
+  var paused = false;
+  var visible = false;
+  var score = 0;
+  var combo = 0;
+  var integrity = 100;
+  var best = 0;
+  var spawnTimer = null;
+  var activeBugs = {}; /* slotIndex -> { timeout } */
+
+  try { best = parseInt(window.localStorage.getItem(BEST_KEY), 10) || 0; } catch (e) { best = 0; }
+
+  /* ---------- Build the board ---------- */
+  for (var i = 0; i < SLOTS; i++) {
+    var slot = document.createElement("button");
+    slot.type = "button";
+    slot.className = "game-slot";
+    slot.setAttribute("aria-label", "Build slot " + (i + 1));
+    slot.dataset.index = String(i);
+    slot.addEventListener("click", onSlotClick);
+    board.appendChild(slot);
+    slots.push(slot);
+  }
+
+  renderHud();
+
+  /* ---------- HUD ---------- */
+  function renderHud() {
+    if (scoreEl) scoreEl.textContent = String(score);
+    if (comboEl) comboEl.textContent = "x" + (combo > 0 ? combo : 1);
+    if (bestEl) bestEl.textContent = String(best);
+    if (integrityBar) integrityBar.style.width = Math.max(0, integrity) + "%";
+    if (integrityLabel) integrityLabel.textContent = "build integrity " + Math.max(0, integrity) + "%";
+    if (integrityWrap) {
+      integrityWrap.classList.toggle("is-warn", integrity <= 60 && integrity > 30);
+      integrityWrap.classList.toggle("is-danger", integrity <= 30);
+    }
+  }
+
+  /* ---------- Spawning ---------- */
+  function spawnDelay() {
+    /* Gets faster as the score climbs */
+    var base = 950 - score * 32;
+    if (base < 340) base = 340;
+    return base + Math.random() * 260;
+  }
+
+  function bugLifetime() {
+    var life = 1500 - score * 38;
+    if (life < 620) life = 620;
+    return life;
+  }
+
+  function freeSlots() {
+    var free = [];
+    for (var i = 0; i < slots.length; i++) {
+      if (!activeBugs[i] && !slots[i].classList.contains("is-splat")) free.push(i);
+    }
+    return free;
+  }
+
+  function scheduleSpawn() {
+    clearTimeout(spawnTimer);
+    if (!running || paused) return;
+    spawnTimer = setTimeout(function () {
+      spawnBug();
+      scheduleSpawn();
+    }, spawnDelay());
+  }
+
+  function spawnBug() {
+    if (!running || paused) return;
+    var free = freeSlots();
+    if (!free.length) return;
+    var idx = free[Math.floor(Math.random() * free.length)];
+    var slot = slots[idx];
+    slot.classList.add("has-bug");
+    slot.innerHTML = '<span aria-hidden="true">🐛</span>';
+    activeBugs[idx] = {
+      timeout: setTimeout(function () { missBug(idx); }, bugLifetime())
+    };
+  }
+
+  function clearSlot(idx) {
+    var bug = activeBugs[idx];
+    if (bug) { clearTimeout(bug.timeout); delete activeBugs[idx]; }
+    var slot = slots[idx];
+    slot.classList.remove("has-bug");
+    slot.innerHTML = "";
+  }
+
+  /* ---------- Interactions ---------- */
+  function onSlotClick(e) {
+    var idx = parseInt(e.currentTarget.dataset.index, 10);
+    if (!running || paused || !activeBugs[idx]) return;
+    squashBug(idx);
+  }
+
+  function squashBug(idx) {
+    var slot = slots[idx];
+    clearTimeout(activeBugs[idx].timeout);
+    delete activeBugs[idx];
+
+    slot.classList.remove("has-bug");
+    slot.classList.add("is-splat");
+    slot.innerHTML = '<span aria-hidden="true">💥</span>';
+    setTimeout(function () {
+      slot.classList.remove("is-splat");
+      slot.innerHTML = "";
+    }, 340);
+
+    score += 1;
+    combo += 1;
+    if (score > best) {
+      best = score;
+      try { window.localStorage.setItem(BEST_KEY, String(best)); } catch (err) {}
+    }
+    renderHud();
+    scheduleSpawn(); /* re-time so the pace tracks the new score */
+  }
+
+  function missBug(idx) {
+    if (!running) return;
+    var slot = slots[idx];
+    clearSlot(idx);
+    slot.classList.add("is-miss");
+    setTimeout(function () { slot.classList.remove("is-miss"); }, 420);
+
+    combo = 0;
+    integrity -= 10;
+    board.classList.add("is-shake");
+    setTimeout(function () { board.classList.remove("is-shake"); }, 340);
+    renderHud();
+
+    if (integrity <= 0) {
+      integrity = 0;
+      renderHud();
+      crash();
+    }
+  }
+
+  /* ---------- Game state ---------- */
+  function resetBoard() {
+    Object.keys(activeBugs).forEach(function (k) { clearSlot(parseInt(k, 10)); });
+    activeBugs = {};
+    slots.forEach(function (s) {
+      s.classList.remove("has-bug", "is-splat", "is-miss");
+      s.innerHTML = "";
+    });
+  }
+
+  function startGame() {
+    resetBoard();
+    score = 0;
+    combo = 0;
+    integrity = 100;
+    running = true;
+    paused = false;
+    renderHud();
+    overlay.classList.add("is-hidden");
+    scheduleSpawn();
+  }
+
+  function crash() {
+    running = false;
+    clearTimeout(spawnTimer);
+    resetBoard();
+    if (overlayTitle) overlayTitle.textContent = "Build crashed";
+    if (overlayMsg) {
+      overlayMsg.textContent = "Too many bugs shipped. You squashed " + score +
+        (score === 1 ? " bug" : " bugs") + " - best so far is " + best + ".";
+    }
+    startBtn.textContent = "↻ rebuild & retry";
+    overlay.classList.remove("is-hidden");
+  }
+
+  function pauseGame() {
+    if (!running || paused) return;
+    paused = true;
+    clearTimeout(spawnTimer);
+    Object.keys(activeBugs).forEach(function (k) { clearSlot(parseInt(k, 10)); });
+    activeBugs = {};
+  }
+
+  function resumeGame() {
+    if (!running || !paused) return;
+    paused = false;
+    scheduleSpawn();
+  }
+
+  startBtn.addEventListener("click", startGame);
+
+  /* ---------- Auto pause when off-screen or on a hidden tab ---------- */
+  function syncActivity() {
+    if (!running) return;
+    if (visible && !document.hidden) resumeGame();
+    else pauseGame();
+  }
+
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        visible = entry.isIntersecting;
+        syncActivity();
+      });
+    }, { threshold: 0.25 });
+    io.observe(root);
+  } else {
+    visible = true;
+  }
+
+  document.addEventListener("visibilitychange", syncActivity);
+})();

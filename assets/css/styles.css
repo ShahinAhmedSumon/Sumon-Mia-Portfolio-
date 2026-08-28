@@ -459,7 +459,7 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
 .why-item p { color: var(--muted); font-size: 15px; }
 
 /* ---------- Process (build log) ---------- */
-.buildlog { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 64px; align-items: start; }
+.buildlog { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 26px 64px; align-items: start; }
 .buildlog-intro { position: sticky; top: calc(var(--nav-h) + 40px); }
 .buildlog-lead { margin-top: 20px; color: var(--muted); font-size: 17px; max-width: 460px; }
 .buildlog-facts {
@@ -518,6 +518,15 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
 .buildlog-branch.release { color: #3ddc84; border-color: rgba(61, 220, 132, 0.4); }
 .buildlog-day { margin-left: auto; font-family: var(--font-mono); font-size: 12px; color: var(--muted-2); }
 .buildlog-title { font-family: var(--font-head); font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+.buildlog-cmd {
+  display: flex; flex-direction: column; gap: 3px;
+  margin-top: 10px; padding: 8px 12px;
+  font-family: var(--font-mono); font-size: 12px; line-height: 1.5;
+  background: rgba(255, 255, 255, 0.02); border: 1px solid var(--line);
+  border-radius: 8px; overflow-wrap: anywhere;
+}
+.buildlog-cmd span:first-child { color: var(--muted-2); }
+.buildlog-cmd span:last-child { color: #a5e68c; }
 .buildlog-desc { color: var(--muted); font-size: 14.5px; margin-top: 6px; }
 .buildlog-deliver { margin-top: 10px; font-family: var(--font-mono); font-size: 13px; color: #a5e68c; }
 .buildlog-passed {
@@ -527,6 +536,99 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
   border-radius: 10px; padding: 12px 16px;
 }
 .buildlog-passed .typing-caret { background: #3ddc84; }
+
+/* ---------- Bug Squash (live game) ---------- */
+.buildlog-game {
+  grid-column: 2;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+.game-hud {
+  display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  padding: 14px 18px; border-bottom: 1px solid var(--line);
+}
+.game-integrity { flex: 1 1 200px; min-width: 170px; }
+.game-integrity-track {
+  height: 7px; border-radius: 999px; overflow: hidden;
+  background: rgba(255, 255, 255, 0.07);
+}
+.game-integrity-fill {
+  display: block; height: 100%; width: 100%; border-radius: 999px;
+  background: #3ddc84; transition: width 0.3s var(--ease), background 0.3s;
+}
+.game-integrity.is-warn .game-integrity-fill { background: #f5c451; }
+.game-integrity.is-danger .game-integrity-fill { background: #ff5f57; }
+.game-integrity-label {
+  display: block; margin-top: 7px;
+  font-family: var(--font-mono); font-size: 11.5px; color: var(--muted-2);
+}
+.game-stats { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.game-stat {
+  font-family: var(--font-mono); font-size: 11.5px; color: var(--muted-2);
+  letter-spacing: 0.02em;
+}
+.game-stat b { color: var(--accent-2); font-weight: 700; margin-left: 4px; }
+
+.game-stage { position: relative; }
+.game-board {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;
+  padding: 18px;
+}
+.game-board.is-shake { animation: gameShake 0.32s var(--ease); }
+@keyframes gameShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-3px); }
+}
+.game-slot {
+  position: relative; aspect-ratio: 1 / 1; padding: 0;
+  border: 1px dashed var(--line-strong); border-radius: 10px;
+  background: rgba(255, 255, 255, 0.015);
+  display: grid; place-items: center;
+  font-size: clamp(16px, 2.1vw, 22px); line-height: 1;
+  cursor: default; user-select: none;
+  transition: border-color 0.25s, background 0.25s;
+}
+.game-slot.has-bug {
+  cursor: pointer; border-style: solid; border-color: rgba(255, 95, 87, 0.5);
+  background: rgba(255, 95, 87, 0.08);
+}
+.game-slot.has-bug span { animation: bugPop 0.22s var(--ease); }
+@keyframes bugPop {
+  from { transform: scale(0.4); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.game-slot.is-splat {
+  border-style: solid; border-color: rgba(61, 220, 132, 0.5);
+  background: rgba(61, 220, 132, 0.1);
+}
+.game-slot.is-splat span { animation: bugSplat 0.34s var(--ease) forwards; }
+@keyframes bugSplat {
+  0% { transform: scale(1); opacity: 1; }
+  55% { transform: scale(1.5) rotate(12deg); opacity: 1; }
+  100% { transform: scale(0.7); opacity: 0; }
+}
+.game-slot.is-miss { animation: slotMiss 0.4s var(--ease); }
+@keyframes slotMiss {
+  0% { background: rgba(255, 95, 87, 0.32); }
+  100% { background: rgba(255, 255, 255, 0.015); }
+}
+.game-hint {
+  padding: 0 18px 16px; font-family: var(--font-mono);
+  font-size: 11.5px; color: var(--muted-2);
+}
+.game-overlay {
+  position: absolute; inset: 0; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; text-align: center; padding: 24px;
+  background: rgba(8, 10, 18, 0.82); backdrop-filter: blur(6px);
+}
+.game-overlay.is-hidden { display: none; }
+.game-overlay-title { font-family: var(--font-head); font-size: 21px; font-weight: 800; }
+.game-overlay-msg { color: var(--muted); font-size: 14px; max-width: 380px; }
+.game-overlay .btn { margin-top: 6px; font-family: var(--font-mono); }
 
 /* ---------- CTA band ---------- */
 .cta-band {
@@ -623,6 +725,9 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
 .social-icon[data-social="facebook"]:hover {
   color: #1877f2; border-color: #1877f2; background: rgba(24, 119, 242, 0.1);
 }
+.social-icon[data-social="linkedin"]:hover {
+  color: #0a66c2; border-color: #0a66c2; background: rgba(10, 102, 194, 0.1);
+}
 .social-icon[data-social="whatsapp"]:hover {
   color: #25d366; border-color: #25d366; background: rgba(37, 211, 102, 0.1);
 }
@@ -657,6 +762,7 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
   .why-grid { grid-template-columns: repeat(2, 1fr); }
   .buildlog { grid-template-columns: 1fr; gap: 44px; }
   .buildlog-intro { position: static; }
+  .buildlog-game { grid-column: 1; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .faq-wrap { grid-template-columns: 1fr; gap: 40px; }
   .section { padding: 92px 0; }
@@ -790,6 +896,12 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
   .buildlog-desc { font-size: 14px; }
   .buildlog-deliver { font-size: 12.5px; }
   .buildlog-passed { font-size: 12.5px; padding: 10px 13px; }
+  .buildlog-cmd { font-size: 11px; padding: 7px 10px; }
+  .game-board { grid-template-columns: repeat(4, 1fr); gap: 7px; padding: 14px; }
+  .game-hud { padding: 12px 14px; gap: 12px; }
+  .game-hint { padding: 0 14px 14px; }
+  .game-overlay-title { font-size: 18px; }
+  .game-overlay-msg { font-size: 13px; }
   .work-card { padding: 20px 18px; }
   .work-name { font-size: 18px; }
   .work-desc { font-size: 14px; }
