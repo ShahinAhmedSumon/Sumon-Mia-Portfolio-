@@ -1,12 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" role="img" aria-label="Ahmed Sumon">
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" role="img" aria-label="Sumon Mia">
   <defs>
-    <linearGradient id="as-grad" x1="0" y1="0" x2="96" y2="96" gradientUnits="userSpaceOnUse">
+    <linearGradient id="sm-grad" x1="0" y1="0" x2="96" y2="96" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#7c8cff"/>
       <stop offset="1" stop-color="#4fd8ff"/>
     </linearGradient>
   </defs>
   <rect width="96" height="96" rx="22" fill="#10141f"/>
   <rect x="0.5" y="0.5" width="95" height="95" rx="21.5" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
-  <text x="48" y="62" font-family="Sora, Arial, sans-serif" font-size="42" font-weight="800" fill="url(#as-grad)" text-anchor="middle" letter-spacing="-1">AS</text>
-  <circle cx="74" cy="22" r="5.5" fill="url(#as-grad)"/>
+  <text x="48" y="62" font-family="Sora, Arial, sans-serif" font-size="42" font-weight="800" fill="url(#sm-grad)" text-anchor="middle" letter-spacing="-1">SM</text>
+  <circle cx="74" cy="22" r="5.5" fill="url(#sm-grad)"/>
 </svg>

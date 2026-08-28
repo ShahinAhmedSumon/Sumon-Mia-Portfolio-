@@ -1,5 +1,5 @@
 /* ============================================================
-   Ahmed Sumon - Portfolio
+   Sumon Mia - Portfolio
    Premium dark theme · Sora / Inter / JetBrains Mono
    ============================================================ */
 
@@ -460,7 +460,10 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
 
 /* ---------- Process (build log) ---------- */
 .buildlog { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 26px 64px; align-items: start; }
-.buildlog-intro { position: sticky; top: calc(var(--nav-h) + 40px); }
+.buildlog-intro {
+  grid-column: 1; grid-row: 1 / span 2; align-self: start;
+  position: sticky; top: calc(var(--nav-h) + 40px);
+}
 .buildlog-lead { margin-top: 20px; color: var(--muted); font-size: 17px; max-width: 460px; }
 .buildlog-facts {
   list-style: none; margin-top: 28px;
@@ -471,6 +474,7 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
 .buildlog-facts li::before { content: "✓"; color: #3ddc84; font-weight: 700; flex-shrink: 0; }
 
 .buildlog-terminal {
+  grid-column: 2; grid-row: 1;
   background: var(--surface); border: 1px solid var(--line);
   border-radius: var(--radius); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
   overflow: hidden;
@@ -539,7 +543,7 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
 
 /* ---------- Bug Squash (live game) ---------- */
 .buildlog-game {
-  grid-column: 2;
+  grid-column: 2; grid-row: 2;
   background: var(--surface); border: 1px solid var(--line);
   border-radius: var(--radius); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
   overflow: hidden;
@@ -761,8 +765,9 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
   .work-grid { grid-template-columns: repeat(2, 1fr); }
   .why-grid { grid-template-columns: repeat(2, 1fr); }
   .buildlog { grid-template-columns: 1fr; gap: 44px; }
-  .buildlog-intro { position: static; }
-  .buildlog-game { grid-column: 1; }
+  .buildlog-intro { position: static; grid-column: auto; grid-row: auto; }
+  .buildlog-terminal { grid-column: auto; grid-row: auto; }
+  .buildlog-game { grid-column: auto; grid-row: auto; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .faq-wrap { grid-template-columns: 1fr; gap: 40px; }
   .section { padding: 92px 0; }

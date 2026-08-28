@@ -66,7 +66,7 @@
         var logos = document.querySelectorAll(".logo .logo-img");
         logos.forEach(function (img) {
           img.src = c.theme.logoImage;
-          img.alt = "Ahmed Sumon";
+          img.alt = "Sumon Mia";
         });
       }
       /* Favicon - swaps the browser-tab icon when set */

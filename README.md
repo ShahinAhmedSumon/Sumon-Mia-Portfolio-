@@ -1,6 +1,6 @@
-# Ahmed Sumon — Personal Portfolio Website
+# Sumon Mia — Personal Portfolio Website
 
-A premium, modern, single-page portfolio website for **Ahmed Sumon**, a web developer with 3+ years of industry experience specialising in **WordPress, WooCommerce, Shopify, SEO** and **custom web development**.
+A premium, modern, single-page portfolio website for **Sumon Mia**, a web developer with 3+ years of industry experience specialising in **WordPress, WooCommerce, Shopify, SEO** and **custom web development**.
 
 ## ✨ Features
 
@@ -56,9 +56,9 @@ Then visit `http://localhost:8000`.
 
 ## 📬 Contact
 
-- **Name:** Ahmed Sumon
+- **Name:** Sumon Mia
 - **Email:** ahmedsumonshahin645@gmail.com
 
 ---
 
-© Ahmed Sumon. Built with care.
+© Sumon Mia. Built with care.
