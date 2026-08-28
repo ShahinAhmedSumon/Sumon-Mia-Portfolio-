@@ -606,6 +606,11 @@ body {
   border-color: rgba(24, 119, 242, 0.5);
 }
 
+.social-preview .social-icon[data-social="linkedin"]:not(.is-dim) {
+  color: #0a66c2;
+  border-color: rgba(10, 102, 194, 0.5);
+}
+
 .social-preview .social-icon[data-social="whatsapp"]:not(.is-dim) {
   color: #25d366;
   border-color: rgba(37, 211, 102, 0.5);

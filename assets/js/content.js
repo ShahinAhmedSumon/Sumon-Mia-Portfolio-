@@ -98,22 +98,22 @@
     (function () {
       var social = c.social || {};
       var rows = [document.querySelector(".footer-social"), document.querySelector(".nav-social")];
-      var fbHref = socialUrl(social.facebook, false);
-      var waHref = socialUrl(social.whatsapp, true);
+      var hrefs = {
+        facebook: socialUrl(social.facebook, false),
+        linkedin: socialUrl(social.linkedin, false),
+        whatsapp: socialUrl(social.whatsapp, true)
+      };
+      var anySet = hrefs.facebook || hrefs.linkedin || hrefs.whatsapp;
       rows.forEach(function (row) {
         if (!row) return;
-        var fbIcon = row.querySelector('.social-icon[data-social="facebook"]');
-        var waIcon = row.querySelector('.social-icon[data-social="whatsapp"]');
-        if (fbIcon) {
-          if (fbHref) { fbIcon.href = fbHref; fbIcon.style.display = ""; }
-          else fbIcon.style.display = "none";
-        }
-        if (waIcon) {
-          if (waHref) { waIcon.href = waHref; waIcon.style.display = ""; }
-          else waIcon.style.display = "none";
-        }
-        /* Hide the whole row when neither link is set */
-        row.style.display = (fbHref || waHref) ? "" : "none";
+        Object.keys(hrefs).forEach(function (key) {
+          var icon = row.querySelector('.social-icon[data-social="' + key + '"]');
+          if (!icon) return;
+          if (hrefs[key]) { icon.href = hrefs[key]; icon.style.display = ""; }
+          else icon.style.display = "none";
+        });
+        /* Hide the whole row only when none of the links are set */
+        row.style.display = anySet ? "" : "none";
       });
     })();
 

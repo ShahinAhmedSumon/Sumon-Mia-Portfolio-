@@ -42,8 +42,10 @@
 
       /* Social links (Site Info tab) */
       socialFacebook:  document.getElementById("socialFacebook"),
+      socialLinkedin:  document.getElementById("socialLinkedin"),
       socialWhatsapp:  document.getElementById("socialWhatsapp"),
       socialFbPreview: document.querySelector('#socialPreview .social-icon[data-social="facebook"]'),
+      socialLiPreview: document.querySelector('#socialPreview .social-icon[data-social="linkedin"]'),
       socialWaPreview: document.querySelector('#socialPreview .social-icon[data-social="whatsapp"]'),
       socialPreviewNote: document.getElementById("socialPreviewNote"),
 
@@ -175,7 +177,7 @@
     });
 
     /* Social links live preview */
-    [els.socialFacebook, els.socialWhatsapp].forEach(function (el) {
+    [els.socialFacebook, els.socialLinkedin, els.socialWhatsapp].forEach(function (el) {
       if (el) el.addEventListener("input", updateSocialPreview);
     });
 
@@ -326,6 +328,7 @@
     /* Social links */
     if (c.social) {
       _val(els.socialFacebook, c.social.facebook);
+      _val(els.socialLinkedin, c.social.linkedin);
       _val(els.socialWhatsapp, c.social.whatsapp);
     }
     updateSocialPreview();
@@ -549,11 +552,13 @@
   function updateSocialPreview() {
     if (!els.socialFbPreview || !els.socialWaPreview) return;
     var fb = els.socialFacebook ? els.socialFacebook.value.trim() : "";
+    var li = els.socialLinkedin ? els.socialLinkedin.value.trim() : "";
     var wa = els.socialWhatsapp ? els.socialWhatsapp.value.trim() : "";
     els.socialFbPreview.classList.toggle("is-dim", !fb);
+    if (els.socialLiPreview) els.socialLiPreview.classList.toggle("is-dim", !li);
     els.socialWaPreview.classList.toggle("is-dim", !wa);
     if (els.socialPreviewNote) {
-      els.socialPreviewNote.textContent = (fb || wa)
+      els.socialPreviewNote.textContent = (fb || li || wa)
         ? "Icons will show in the footer and mobile menu"
         : "Empty - social icons stay hidden on your site";
     }
@@ -743,6 +748,7 @@
     /* Social links (stored as digits for WhatsApp, in +880 format) */
     if (!c.social) c.social = {};
     c.social.facebook = _get(els.socialFacebook);
+    c.social.linkedin = _get(els.socialLinkedin);
     var wa = normalizeWhatsapp(_get(els.socialWhatsapp));
     c.social.whatsapp = wa ? wa.replace(/^https:\/\/wa\.me\//i, "") : "";
 

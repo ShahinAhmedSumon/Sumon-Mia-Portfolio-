@@ -65,6 +65,9 @@
           <a class="social-icon" data-social="facebook" href="https://www.facebook.com/sahinaahmed.sumon.5" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
           </a>
+          <a class="social-icon" data-social="linkedin" href="https://www.linkedin.com/in/sumon-mia-26b389380/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5M2.4 21.5h5.16V9.75H2.4zM9.9 9.75h4.95v1.6h.07c.69-1.24 2.38-2.55 4.9-2.55 5.24 0 6.21 3.32 6.21 7.63V21.5h-5.16v-4.94c0-1.18-.02-2.7-1.7-2.7-1.7 0-1.96 1.28-1.96 2.61v5.03H9.9z"/></svg>
+          </a>
           <a class="social-icon" data-social="whatsapp" href="https://wa.me/8801867473337" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
           </a>
@@ -452,15 +455,15 @@
             <span class="eyebrow">07 · How I Work</span>
             <h2 class="section-title">No black box.<br /><span class="accent">A live build log.</span></h2>
             <p class="buildlog-lead">
-              Most "our process" sections say the same four words: discover, design,
-              develop, deliver. Mine works like a real terminal log - you see exactly
-              what happens, when it happens, and what you get at every step.
+              Most process pages show you a flowchart. This is what actually happens:
+              real commits, a staging link in week one, and a launch that isn't the
+              end of the work - it's where the real work starts.
             </p>
             <ul class="buildlog-facts">
-              <li>Fixed quote before any work starts</li>
-              <li>A clickable link in the first week</li>
-              <li>One person, zero handoffs</li>
-              <li>You own everything we build</li>
+              <li>Fixed quote locked before day one</li>
+              <li>Staging link in your inbox by day eight</li>
+              <li>One developer, zero handoffs</li>
+              <li>You own the code, the domain, everything</li>
             </ul>
           </div>
 
@@ -481,8 +484,12 @@
                     <span class="buildlog-day">Day 01-03</span>
                   </div>
                   <h3 class="buildlog-title">The call where I mostly listen</h3>
-                  <p class="buildlog-desc">We talk through your business, your audience and what the site has to do. You get questions, not a sales pitch - and a clear plan for what we're building together.</p>
-                  <p class="buildlog-deliver">→ you get: a scoped plan and a fixed quote</p>
+                  <div class="buildlog-cmd">
+                    <span>$ git init your-project &amp;&amp; wp core download</span>
+                    <span>✓ repo ready · local setup done in 4 min</span>
+                  </div>
+                  <p class="buildlog-desc">A 45-minute call about your customers, your competitors and what "done" actually means. Then I send a short scope document and a price that stays the same from day one to launch.</p>
+                  <p class="buildlog-deliver">→ you get: a written scope and a fixed quote</p>
                 </div>
               </div>
 
@@ -495,8 +502,12 @@
                     <span class="buildlog-day">Day 04-08</span>
                   </div>
                   <h3 class="buildlog-title">You click a real link early</h3>
-                  <p class="buildlog-desc">A live staging link lands in your inbox within the first week. You watch the real site take shape and give feedback while it's easy to change - no waiting for a big reveal.</p>
-                  <p class="buildlog-deliver">→ you get: a staging link to click around</p>
+                  <div class="buildlog-cmd">
+                    <span>$ npm run build &amp;&amp; git push staging</span>
+                    <span>✓ 42 files shipped · staging link live</span>
+                  </div>
+                  <p class="buildlog-desc">By day eight you're clicking a real staging site - homepage, menu and first pages working. You leave feedback directly on the page while changes are still cheap and fast.</p>
+                  <p class="buildlog-deliver">→ you get: a live staging link and a feedback board</p>
                 </div>
               </div>
 
@@ -509,8 +520,12 @@
                     <span class="buildlog-day">Week 02-03</span>
                   </div>
                   <h3 class="buildlog-title">One person builds it all</h3>
-                  <p class="buildlog-desc">Design, development, copy, SEO and launch - it's all me. No handoffs between designers and developers, no telephone game, and nothing lost in translation.</p>
-                  <p class="buildlog-deliver">→ you get: the whole build, from one developer</p>
+                  <div class="buildlog-cmd">
+                    <span>$ wp plugin update --all &amp;&amp; npm run optimize</span>
+                    <span>✓ 0 handoffs · 1 developer · weekly builds</span>
+                  </div>
+                  <p class="buildlog-desc">Design, code, content, speed - one person handles the whole build. You message the developer directly, so your feedback lands in the code within hours, not weeks.</p>
+                  <p class="buildlog-deliver">→ you get: weekly builds and zero handoffs</p>
                 </div>
               </div>
 
@@ -523,13 +538,51 @@
                     <span class="buildlog-day">Launch day</span>
                   </div>
                   <h3 class="buildlog-title">Launch is the midpoint</h3>
-                  <p class="buildlog-desc">The site goes live on your domain - and that's where the real work begins. Monitoring, tweaks and performance checks keep it fast and earning its keep.</p>
-                  <p class="buildlog-deliver">→ you get: a live site plus post-launch care</p>
+                  <div class="buildlog-cmd">
+                    <span>$ git push origin release &amp;&amp; curl -I your-domain.com</span>
+                    <span>✓ HTTP/2 200 · SSL on · analytics tracking</span>
+                  </div>
+                  <p class="buildlog-desc">The site goes live on your domain with SSL, backups and analytics switched on. I stay on for the first month - fixing, tuning and watching which pages actually convert.</p>
+                  <p class="buildlog-deliver">→ you get: a live site plus 30 days of care</p>
                 </div>
               </div>
 
               <div class="buildlog-passed">✔ build passed · site live on your domain<span class="typing-caret"></span></div>
             </div>
+          </div>
+
+          <div class="buildlog-game" id="bugSquash">
+            <div class="buildlog-head">
+              <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+              <span class="buildlog-path">ahmed@sumon: ~/clients/your-project --debug</span>
+              <span class="buildlog-badge"><span class="pulse"></span> live game</span>
+            </div>
+
+            <div class="game-hud">
+              <div class="game-integrity">
+                <div class="game-integrity-track">
+                  <span class="game-integrity-fill" id="gameIntegrity"></span>
+                </div>
+                <span class="game-integrity-label" id="gameIntegrityLabel">build integrity 100%</span>
+              </div>
+              <div class="game-stats">
+                <span class="game-stat">bugs <b id="gameScore">0</b></span>
+                <span class="game-stat">combo <b id="gameCombo">x1</b></span>
+                <span class="game-stat">best <b id="gameBest">0</b></span>
+              </div>
+            </div>
+
+            <div class="game-stage">
+              <div class="game-board" id="gameBoard" role="group" aria-label="Bug squash board"></div>
+
+              <div class="game-overlay" id="gameOverlay">
+                <h3 class="game-overlay-title" id="gameOverlayTitle">Bug Squash</h3>
+                <p class="game-overlay-msg" id="gameOverlayMsg">Bugs keep crawling into the build. Click them before they ship - miss four and the build crashes.</p>
+                <button class="btn btn-primary btn-small" id="gameStartBtn" type="button">▶ run build</button>
+              </div>
+            </div>
+
+            <p class="game-hint">Click a bug to squash it. Every miss costs 10% build integrity.</p>
           </div>
         </div>
       </div>
@@ -695,6 +748,9 @@
       <div class="footer-social" aria-label="Social links">
         <a class="social-icon" data-social="facebook" href="https://www.facebook.com/sahinaahmed.sumon.5" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
           <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a class="social-icon" data-social="linkedin" href="https://www.linkedin.com/in/sumon-mia-26b389380/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5M2.4 21.5h5.16V9.75H2.4zM9.9 9.75h4.95v1.6h.07c.69-1.24 2.38-2.55 4.9-2.55 5.24 0 6.21 3.32 6.21 7.63V21.5h-5.16v-4.94c0-1.18-.02-2.7-1.7-2.7-1.7 0-1.96 1.28-1.96 2.61v5.03H9.9z"/></svg>
         </a>
         <a class="social-icon" data-social="whatsapp" href="https://wa.me/8801867473337" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
           <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
