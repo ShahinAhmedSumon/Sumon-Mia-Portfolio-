@@ -1,5 +1,5 @@
 /* ============================================================
-   Ahmed Sumon - Portfolio interactions
+   Sumon Mia - Portfolio interactions
    ============================================================ */
 (function () {
   "use strict";
@@ -277,7 +277,7 @@
 
     const subject = encodeURIComponent("Project inquiry - " + type);
     const body = encodeURIComponent(
-      "Hi Ahmed,\n\n" +
+      "Hi Sumon,\n\n" +
       "My name: " + name + "\n" +
       "My email: " + email + "\n" +
       "Project type: " + type + "\n\n" +

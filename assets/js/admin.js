@@ -542,7 +542,7 @@
     var accent = els.themeAccent ? els.themeAccent.value : "#7c8cff";
     els.themePreview.style.background = bg;
     els.themePreview.style.color      = accent;
-    els.themePreview.textContent      = "Ahmed Sumon";
+    els.themePreview.textContent      = "Sumon Mia";
   }
 
   /* ================================================================
