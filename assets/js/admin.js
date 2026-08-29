@@ -91,6 +91,11 @@
       projectList:   document.getElementById("projectList"),
       addProjectBtn: document.getElementById("addProjectBtn"),
 
+      /* Category manager */
+      categoryList:   document.getElementById("categoryList"),
+      newCategoryName: document.getElementById("newCategoryName"),
+      addCategoryBtn: document.getElementById("addCategoryBtn"),
+
       /* FAQ */
       faqList:   document.getElementById("faqList"),
       addFaqBtn: document.getElementById("addFaqBtn"),
@@ -122,7 +127,7 @@
       pName:    document.getElementById("pName"),
       pDomain:  document.getElementById("pDomain"),
       pUrl:     document.getElementById("pUrl"),
-      pCat:     document.getElementById("pCat"),
+      pCategories: document.getElementById("pCategories"),
       pFeatured:document.getElementById("pFeatured"),
       pDesc:    document.getElementById("pDesc"),
       projectModalSave:   document.getElementById("projectModalSave"),
@@ -221,6 +226,12 @@
     els.projectModalCancel.addEventListener("click", function () { closeModal(els.projectModal); });
     els.projectModalDelete.addEventListener("click", deleteProject);
     els.addProjectBtn.addEventListener("click", function () { openProjectModal(-1); });
+
+    /* Category manager */
+    els.addCategoryBtn.addEventListener("click", addCategory);
+    els.newCategoryName.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") addCategory();
+    });
 
     /* FAQ modal */
     els.faqModalSave.addEventListener("click", saveFaqModal);
@@ -389,6 +400,9 @@
     /* Projects */
     renderProjectList();
 
+    /* Category manager */
+    renderCategoryList();
+
     /* FAQ */
     renderFaqList();
   }
@@ -407,10 +421,15 @@
     projects.forEach(function (p, i) {
       var item = document.createElement("div");
       item.className = "project-item";
+      var catChips = "";
+      projectCats(p).forEach(function (cid) {
+        catChips += '<span class="project-cat-chip">' + escHtml(categoryLabel(cid)) + "</span>";
+      });
       item.innerHTML =
         '<div class="project-item-body">' +
           '<div class="project-item-name">' + escHtml(p.name) + "</div>" +
           '<div class="project-item-domain">' + escHtml(p.domain) + "</div>" +
+          (catChips ? '<div class="project-item-cats">' + catChips + "</div>" : "") +
         "</div>" +
         (p.featured ? '<span class="featured-badge">Featured</span>' : "") +
         '<div class="project-item-actions">' +
@@ -433,19 +452,27 @@
     _val(els.pName,     p.name     || "");
     _val(els.pDomain,   p.domain   || "");
     _val(els.pUrl,      p.url      || "");
-    _val(els.pCat,      p.cat      || "business");
     _val(els.pDesc,     p.desc     || "");
     els.pFeatured.checked = !!p.featured;
+    renderCategoryCheckboxes(projectCats(p));
     els.projectModalDelete.style.display = idx >= 0 ? "inline-flex" : "none";
     openModal(els.projectModal);
   }
 
   function saveProjectModal() {
+    var selected = selectedCategories();
+    if (selected.length < 1) {
+      toast("Choose at least 1 category.", "warn"); return;
+    }
+    if (selected.length > 3) {
+      toast("Choose at most 3 categories.", "warn"); return;
+    }
     var p = {
       name:     els.pName.value.trim(),
       domain:   els.pDomain.value.trim(),
       url:      els.pUrl.value.trim(),
-      cat:      els.pCat.value,
+      cat:      selected[0],        /* legacy single-string, kept backward-compatible */
+      categories: selected,         /* multi-category array */
       featured: els.pFeatured.checked,
       desc:     els.pDesc.value.trim()
     };
@@ -461,6 +488,137 @@
     renderProjectList();
     closeModal(els.projectModal);
     markUnsaved();
+  }
+
+  /* A project's categories: `categories` array, else legacy `cat` string */
+  function projectCats(p) {
+    if (Array.isArray(p.categories) && p.categories.length) return p.categories.slice();
+    if (p.cat) return [p.cat];
+    return [];
+  }
+
+  /* Human label for a category id */
+  function categoryLabel(id) {
+    var cats = content && content.categories ? content.categories : [];
+    for (var i = 0; i < cats.length; i++) {
+      if (cats[i].id === id) return cats[i].label;
+    }
+    return id;
+  }
+
+  /* ================================================================
+     CATEGORY MANAGER
+  ================================================================ */
+  function ensureCategories() {
+    if (!Array.isArray(content.categories) || !content.categories.length) {
+      /* Fallback: rebuild from the known default set so the manager never renders empty */
+      content.categories = [
+        { id: "business",   label: "Business" },
+        { id: "ecommerce",  label: "eCommerce" },
+        { id: "services",   label: "Services" },
+        { id: "corporate",  label: "Corporate" },
+        { id: "creative",   label: "Creative" },
+        { id: "art",        label: "Art" },
+        { id: "education",  label: "Education" },
+        { id: "niche",      label: "Specialized" }
+      ];
+    }
+    return content.categories;
+  }
+
+  function renderCategoryList() {
+    if (!els.categoryList) return;
+    var cats = ensureCategories();
+    els.categoryList.innerHTML = "";
+    cats.forEach(function (c) {
+      var chip = document.createElement("span");
+      chip.className = "category-chip";
+      chip.innerHTML =
+        escHtml(c.label) +
+        '<button type="button" class="cat-remove" data-id="' + escHtml(c.id) +
+        '" title="Remove category" aria-label="Remove ' + escHtml(c.label) + '">×</button>';
+      els.categoryList.appendChild(chip);
+    });
+
+    els.categoryList.querySelectorAll(".cat-remove").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        removeCategory(btn.dataset.id);
+      });
+    });
+  }
+
+  function addCategory() {
+    var name = (els.newCategoryName ? els.newCategoryName.value : "").trim();
+    if (!name) { toast("Enter a category name.", "warn"); return; }
+
+    var id = slugify(name);
+    if (!id) { toast("Category name must contain letters or numbers.", "warn"); return; }
+
+    var cats = ensureCategories();
+    if (cats.some(function (c) { return c.id === id; })) {
+      toast("That category already exists.", "warn"); return;
+    }
+
+    cats.push({ id: id, label: name });
+    if (els.newCategoryName) els.newCategoryName.value = "";
+    renderCategoryList();
+    markUnsaved();
+    toast("Category added - click Save Changes to publish.", "success");
+  }
+
+  function removeCategory(id) {
+    var cats = ensureCategories();
+    var idx = -1;
+    cats.forEach(function (c, i) { if (c.id === id) idx = i; });
+    if (idx < 0) return;
+
+    if (!confirm("Remove this category? It will also be removed from any project using it.")) return;
+
+    cats.splice(idx, 1);
+
+    /* Strip the category from every project (both `categories` and legacy `cat`) */
+    (content.projects || []).forEach(function (p) {
+      if (Array.isArray(p.categories)) {
+        p.categories = p.categories.filter(function (c) { return c !== id; });
+        if (!p.categories.length) delete p.categories;
+      }
+      if (p.cat === id) delete p.cat;
+    });
+
+    renderCategoryList();
+    renderProjectList();
+    markUnsaved();
+  }
+
+  function slugify(s) {
+    return String(s).toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
+  /* Render the modal's category checkboxes, checking `selected` ids */
+  function renderCategoryCheckboxes(selected) {
+    if (!els.pCategories) return;
+    var cats = ensureCategories();
+    els.pCategories.innerHTML = "";
+    cats.forEach(function (c) {
+      var label = document.createElement("label");
+      label.className = "cat-checkbox";
+      label.innerHTML =
+        '<input type="checkbox" value="' + escHtml(c.id) + '"' +
+        (selected.indexOf(c.id) !== -1 ? " checked" : "") + " /> " +
+        escHtml(c.label);
+      els.pCategories.appendChild(label);
+    });
+  }
+
+  function selectedCategories() {
+    if (!els.pCategories) return [];
+    var out = [];
+    els.pCategories.querySelectorAll("input[type=checkbox]:checked").forEach(function (cb) {
+      out.push(cb.value);
+    });
+    return out;
   }
 
   function deleteProject() {

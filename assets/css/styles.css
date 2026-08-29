@@ -428,6 +428,7 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
 @keyframes cardIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
 .work-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: auto; }
+.work-cats { display: flex; flex-wrap: wrap; gap: 6px; }
 .work-cat {
   font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em;
   text-transform: uppercase; color: var(--accent-2);

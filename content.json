@@ -197,6 +197,7 @@
       "domain": "katiehawkinsartist.co.uk",
       "url": "https://katiehawkinsartist.co.uk/",
       "cat": "creative",
+      "categories": ["creative", "art"],
       "featured": false,
       "desc": "Artist portfolio website showcasing work in a clean gallery layout."
     },
@@ -237,6 +238,7 @@
       "domain": "davidmiller.art",
       "url": "https://davidmiller.art/",
       "cat": "creative",
+      "categories": ["creative", "art"],
       "featured": false,
       "desc": "Artist portfolio website presenting a body of creative work."
     },
@@ -312,6 +314,16 @@
       "featured": false,
       "desc": "Creative website for a Dutch brand and community."
     }
+  ],
+  "categories": [
+    { "id": "business", "label": "Business" },
+    { "id": "ecommerce", "label": "eCommerce" },
+    { "id": "services", "label": "Services" },
+    { "id": "corporate", "label": "Corporate" },
+    { "id": "creative", "label": "Creative" },
+    { "id": "art", "label": "Art" },
+    { "id": "education", "label": "Education" },
+    { "id": "niche", "label": "Specialized" }
   ],
   "faq": [
     {
