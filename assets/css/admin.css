@@ -332,6 +332,18 @@ body {
   flex-shrink: 0;
 }
 
+.project-item-cats { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+
+.project-cat-chip {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 2px 8px;
+}
+
 .btn-icon {
   background: none;
   border: 1px solid var(--border);
@@ -357,6 +369,85 @@ body {
   border-radius: 99px;
   flex-shrink: 0;
   align-self: center;
+}
+
+/* ---- Category manager ---- */
+.category-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+
+.category-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 6px 5px 12px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.category-chip .cat-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: 50%;
+  transition: all var(--trans);
+}
+.category-chip .cat-remove:hover { color: var(--danger); background: rgba(248,113,113,0.12); }
+
+.category-add { display: flex; gap: 10px; }
+
+.category-add input {
+  flex: 1;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color var(--trans);
+}
+.category-add input:focus { border-color: var(--accent); }
+
+/* ---- Project modal category checkboxes ---- */
+.cat-checkboxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 2px;
+}
+
+.cat-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 13.5px;
+  color: var(--text);
+  transition: border-color var(--trans);
+  user-select: none;
+}
+.cat-checkbox:hover { border-color: var(--accent); }
+.cat-checkbox input { width: auto; accent-color: var(--accent); }
+
+.cat-limit-hint {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--muted);
+  margin-left: 4px;
 }
 
 /* ---- FAQ List ---- */

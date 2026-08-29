@@ -363,6 +363,21 @@
         </div>
         <div class="project-list" id="projectList"></div>
       </div>
+
+      <div class="panel">
+        <div class="panel-title">
+          <span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 11 3H3v8l9.59 9.59a2 2 0 0 0 2.82 0l5.18-5.18a2 2 0 0 0 0-2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+            Project categories
+          </span>
+        </div>
+        <p class="page-desc" style="margin:0 0 14px;">Add custom categories or remove unused ones. A project can carry 1&ndash;3 categories.</p>
+        <div class="category-list" id="categoryList"></div>
+        <div class="category-add">
+          <input type="text" id="newCategoryName" placeholder="e.g. Photography" maxlength="24" />
+          <button class="btn-secondary" id="addCategoryBtn">+ Add Category</button>
+        </div>
+      </div>
     </section>
 
 
@@ -542,23 +557,16 @@
         <input type="url" id="pUrl" placeholder="https://example.com/" />
       </div>
     </div>
+    <div class="field">
+      <label>Categories <span class="cat-limit-hint">(choose 1&ndash;3)</span></label>
+      <div class="cat-checkboxes" id="pCategories"></div>
+    </div>
     <div class="field-row">
       <div class="field">
-        <label>Category</label>
-        <select id="pCat">
-          <option value="business">Business</option>
-          <option value="ecommerce">eCommerce</option>
-          <option value="services">Services</option>
-          <option value="corporate">Corporate</option>
-          <option value="creative">Creative</option>
-          <option value="education">Education</option>
-          <option value="niche">Specialized</option>
-        </select>
-      </div>
-      <div class="field" style="display:flex;align-items:flex-end;gap:8px;padding-bottom:2px;">
-        <label style="margin-bottom:0;display:flex;align-items:center;gap:8px;cursor:pointer;">
+        <label>Featured</label>
+        <label style="margin-bottom:0;display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:500;text-transform:none;letter-spacing:0;">
           <input type="checkbox" id="pFeatured" style="width:auto;" />
-          Featured project
+          Show as a featured project
         </label>
       </div>
     </div>

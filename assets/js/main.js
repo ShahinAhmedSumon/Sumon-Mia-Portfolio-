@@ -29,31 +29,56 @@
     { name: "Wereld van Tuut",       domain: "wereldvantuut.nl",        url: "https://wereldvantuut.nl/",        cat: "creative", featured: false, desc: "Creative website for a Dutch brand and community." }
   ];
 
+  /* Fallback labels - used only when content.json is unavailable */
   const catLabels = {
     business: "Business", ecommerce: "eCommerce", services: "Services",
-    corporate: "Corporate", creative: "Creative", education: "Education", niche: "Specialized"
+    corporate: "Corporate", creative: "Creative", art: "Art",
+    education: "Education", niche: "Specialized"
   };
 
+  /* Category registry (id -> label). Populated from content.json when available. */
+  let categoryRegistry = {};
+
   const workGrid = document.getElementById("workGrid");
+  const filtersEl = document.getElementById("filters");
+
+  /* A project's categories may live in `categories` (array) or a legacy
+     single-string `cat`. Normalise both to an array safely. */
+  function projectCategories(p) {
+    if (Array.isArray(p.categories) && p.categories.length) return p.categories;
+    if (p.cat) return [p.cat];
+    return [];
+  }
+
+  function categoryLabel(id) {
+    return (categoryRegistry[id] && categoryRegistry[id].label) || catLabels[id] || id;
+  }
 
   function renderProjects(filter) {
     const list = projects.filter(function (p) {
-      return filter === "all" || p.cat === filter;
+      if (filter === "all") return true;
+      return projectCategories(p).indexOf(filter) !== -1;
     });
 
     workGrid.innerHTML = "";
     list.forEach(function (p, i) {
+      const cats = projectCategories(p);
       const card = document.createElement("a");
       card.className = "work-card" + (p.featured ? " featured" : "");
       card.href = p.url;
       card.target = "_blank";
       card.rel = "noopener noreferrer";
       card.style.animationDelay = (i * 0.05) + "s";
-      card.setAttribute("data-cat", p.cat);
+      card.setAttribute("data-cat", cats.join(" "));
+
+      let chipsHtml = "";
+      cats.forEach(function (c) {
+        chipsHtml += '<span class="work-cat">' + categoryLabel(c) + "</span>";
+      });
 
       card.innerHTML =
         '<div class="work-top">' +
-          '<span class="work-cat">' + catLabels[p.cat] + "</span>" +
+          '<span class="work-cats">' + chipsHtml + "</span>" +
           '<span class="work-arrow">' +
             '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>' +
           "</span>" +
@@ -66,15 +91,33 @@
     });
   }
 
-  /* ---------- Portfolio filters ---------- */
-  const filterBtns = document.querySelectorAll(".filter-btn");
-  filterBtns.forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      filterBtns.forEach(function (b) { b.classList.remove("is-active"); });
-      btn.classList.add("is-active");
-      renderProjects(btn.dataset.filter);
+  /* ---------- Portfolio filters (rendered from the category registry) ---------- */
+  function renderFilters() {
+    if (!filtersEl) return;
+    filtersEl.innerHTML = "";
+
+    const allBtn = document.createElement("button");
+    allBtn.className = "filter-btn is-active";
+    allBtn.dataset.filter = "all";
+    allBtn.textContent = "All";
+    allBtn.addEventListener("click", function () { activateFilter(allBtn); });
+    filtersEl.appendChild(allBtn);
+
+    Object.keys(categoryRegistry).forEach(function (id) {
+      const btn = document.createElement("button");
+      btn.className = "filter-btn";
+      btn.dataset.filter = id;
+      btn.textContent = categoryLabel(id);
+      btn.addEventListener("click", function () { activateFilter(btn); });
+      filtersEl.appendChild(btn);
     });
-  });
+  }
+
+  function activateFilter(btn) {
+    filtersEl.querySelectorAll(".filter-btn").forEach(function (b) { b.classList.remove("is-active"); });
+    btn.classList.add("is-active");
+    renderProjects(btn.dataset.filter);
+  }
 
   /* ---------- Typing effect ---------- */
   const roles = ["Web Developer", "WordPress Specialist", "Shopify Developer", "SEO Specialist"];
@@ -297,13 +340,29 @@
   });
 
   /* ---------- Initial render ---------- */
-  /* If content.json loaded via content.js, use its project list */
+  /* If content.json loaded via content.js, use its project list and category registry */
   function initRender() {
-    if (window.__CONTENT__ && window.__CONTENT__.projects && window.__CONTENT__.projects.length) {
-      /* Replace the static array with content.json data */
-      projects.length = 0;
-      window.__CONTENT__.projects.forEach(function (p) { projects.push(p); });
+    if (window.__CONTENT__) {
+      if (window.__CONTENT__.projects && window.__CONTENT__.projects.length) {
+        /* Replace the static array with content.json data */
+        projects.length = 0;
+        window.__CONTENT__.projects.forEach(function (p) { projects.push(p); });
+      }
+      /* Build the category registry from content.json (id -> {id,label}) */
+      if (Array.isArray(window.__CONTENT__.categories) && window.__CONTENT__.categories.length) {
+        categoryRegistry = {};
+        window.__CONTENT__.categories.forEach(function (c) {
+          if (c && c.id) categoryRegistry[c.id] = c;
+        });
+      }
     }
+    /* Fallback: seed the registry from known labels so filters always render */
+    if (!Object.keys(categoryRegistry).length) {
+      Object.keys(catLabels).forEach(function (id) {
+        categoryRegistry[id] = { id: id, label: catLabels[id] };
+      });
+    }
+    renderFilters();
     renderProjects("all");
   }
 
