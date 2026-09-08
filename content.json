@@ -330,6 +330,18 @@
       ],
       "featured": true,
       "desc": ""
+    },
+    {
+      "name": "Evolve Fitness and Recovery Studio",
+      "domain": "studioevolve.co.uk",
+      "url": "https://studioevolve.co.uk/",
+      "cat": "niche",
+      "categories": [
+        "niche",
+        "health-fitness"
+      ],
+      "featured": true,
+      "desc": ""
     }
   ],
   "categories": [
@@ -364,6 +376,10 @@
     {
       "id": "niche",
       "label": "Specialized"
+    },
+    {
+      "id": "health-fitness",
+      "label": "Health & Fitness"
     }
   ],
   "faq": [
